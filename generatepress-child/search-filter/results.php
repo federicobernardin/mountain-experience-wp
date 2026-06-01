@@ -54,6 +54,8 @@ if ( $query->have_posts() ) :
 					<?php
 					if ( has_post_thumbnail() ) {
 						the_post_thumbnail( 'large' );
+					} else {
+						echo '<span class="me-card__image-placeholder" aria-hidden="true"></span>';
 					}
 					?>
 				</a>
