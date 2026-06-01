@@ -69,7 +69,7 @@ if ( $query->have_posts() ) :
 						<p class="me-card__excerpt"><?php echo esc_html( wp_trim_words( get_the_excerpt(), 22 ) ); ?></p>
 					<?php endif; ?>
 
-					<dl class="me-card__facts">
+					<dl class="me-card__facts" aria-label="<?php esc_attr_e( 'Experience technical data', 'mountain-experience' ); ?>">
 						<?php foreach ( $facts as $fact ) : ?>
 							<?php if ( $fact['value'] ) : ?>
 								<div class="me-card__fact">
