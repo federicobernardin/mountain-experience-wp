@@ -24,7 +24,7 @@ if ( $query->have_posts() ) :
 				),
 				array(
 					'label' => __( 'Durata', 'mountain-experience' ),
-					'value' => me_format_field_value( me_get_experience_field( 'duration', $post_id ) ),
+					'value' => me_format_duration( me_get_experience_field( 'duration', $post_id ) ),
 				),
 				array(
 					'label' => __( 'Lunghezza', 'mountain-experience' ),

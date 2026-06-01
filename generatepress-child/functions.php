@@ -49,7 +49,7 @@ function me_register_experience_content_types() {
 				'not_found_in_trash' => __( 'No experiences found in Trash', 'mountain-experience' ),
 			),
 			'public'       => true,
-			'has_archive'  => true,
+			'has_archive'  => false,
 			'menu_icon'    => 'dashicons-location-alt',
 			'rewrite'      => array( 'slug' => 'experiences' ),
 			'show_in_rest' => true,
@@ -157,6 +157,45 @@ function me_format_field_value( $value, $unit = '' ) {
 	}
 
 	return trim( $value . ( $unit ? ' ' . $unit : '' ) );
+}
+
+/**
+ * Format a duration value in minutes.
+ *
+ * @param mixed $minutes Duration in minutes.
+ * @return string
+ */
+function me_format_duration( $minutes ) {
+	if ( '' === $minutes || null === $minutes || is_array( $minutes ) ) {
+		return '';
+	}
+
+	if ( ! is_numeric( $minutes ) || $minutes <= 0 ) {
+		return '';
+	}
+
+	$minutes = absint( $minutes );
+
+	if ( $minutes <= 0 ) {
+		return '';
+	}
+
+	$hours             = floor( $minutes / 60 );
+	$remaining_minutes = $minutes % 60;
+
+	if ( $hours && $remaining_minutes ) {
+		return sprintf(
+			'%1$dh %2$dm',
+			$hours,
+			$remaining_minutes
+		);
+	}
+
+	if ( $hours ) {
+		return sprintf( '%dh', $hours );
+	}
+
+	return sprintf( '%dm', $remaining_minutes );
 }
 
 /**
