@@ -3069,3 +3069,101 @@ body #masthead #site-navigation .main-nav ul li.current_page_item > a {
 		border-radius: 12px !important;
 	}
 }
+
+/* =========================================================
+   HEADER LOGO - Final sizing
+   ========================================================= */
+
+#masthead .site-logo {
+	display: flex !important;
+	align-items: center !important;
+	margin: 0 !important;
+	padding: 0 !important;
+}
+
+#masthead .site-logo a {
+	display: inline-flex !important;
+	align-items: center !important;
+}
+
+#masthead .site-logo img,
+#masthead .header-image {
+	display: block !important;
+	width: auto !important;
+	max-height: 44px !important;
+}
+
+#masthead .site-branding {
+	margin: 0 !important;
+}
+
+@media (max-width: 768px) {
+	#masthead .site-logo img,
+	#masthead .header-image {
+		max-height: 36px !important;
+	}
+}
+
+/* =========================================================
+   HEADER LOGO + TITLE SPACING
+   ========================================================= */
+
+#masthead .site-branding {
+	display: flex !important;
+	align-items: center !important;
+	gap: 14px !important;
+}
+
+#masthead .site-logo {
+	display: flex !important;
+	align-items: center !important;
+	margin-right: 14px !important;
+}
+
+#masthead .site-logo img,
+#masthead .header-image {
+	max-height: 42px !important;
+	width: auto !important;
+	display: block !important;
+}
+
+#masthead .main-title {
+	margin-left: 8px !important;
+	font-size: 1rem !important;
+	line-height: 1 !important;
+}
+
+/* =========================================================
+   HEADER MENU - Cleaner active state
+   ========================================================= */
+
+body #masthead #site-navigation .main-nav ul li a {
+	background: transparent !important;
+	border-radius: 0 !important;
+	position: relative;
+}
+
+body #masthead #site-navigation .main-nav ul li a::after {
+	content: "";
+	position: absolute;
+	left: 13px;
+	right: 13px;
+	bottom: 4px;
+	height: 2px;
+	border-radius: 999px;
+	background: transparent;
+	transition: background 160ms ease;
+}
+
+body #masthead #site-navigation .main-nav ul li a:hover,
+body #masthead #site-navigation .main-nav ul li.current-menu-item > a,
+body #masthead #site-navigation .main-nav ul li.current_page_item > a {
+	color: var(--me-forest) !important;
+	background: transparent !important;
+}
+
+body #masthead #site-navigation .main-nav ul li a:hover::after,
+body #masthead #site-navigation .main-nav ul li.current-menu-item > a::after,
+body #masthead #site-navigation .main-nav ul li.current_page_item > a::after {
+	background: var(--me-forest);
+}
