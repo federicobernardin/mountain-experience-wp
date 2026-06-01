@@ -39,6 +39,18 @@ if ( $query->have_posts() ) :
 
 			<article <?php post_class( 'me-card' ); ?>>
 				<a class="me-card__image" href="<?php the_permalink(); ?>" aria-label="<?php the_title_attribute(); ?>">
+					<span class="me-card__badge-wrap">
+						<?php
+						$activity_terms = get_the_terms( $post_id, 'activity_type' );
+
+						if ( ! empty( $activity_terms ) && ! is_wp_error( $activity_terms ) ) {
+							foreach ( $activity_terms as $term ) {
+								printf( '<span class="me-card__badge">%s</span>', esc_html( $term->name ) );
+							}
+						}
+						?>
+					</span>
+
 					<?php
 					if ( has_post_thumbnail() ) {
 						the_post_thumbnail( 'large' );
@@ -47,18 +59,6 @@ if ( $query->have_posts() ) :
 				</a>
 
 				<div class="me-card__body">
-					<div class="me-experience__kicker">
-						<?php
-						$activity_terms = get_the_terms( $post_id, 'activity_type' );
-
-						if ( ! empty( $activity_terms ) && ! is_wp_error( $activity_terms ) ) {
-							foreach ( $activity_terms as $term ) {
-								printf( '<span class="me-taxonomy-pill">%s</span>', esc_html( $term->name ) );
-							}
-						}
-						?>
-					</div>
-
 					<h2 class="me-card__title">
 						<a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
 					</h2>
@@ -77,6 +77,10 @@ if ( $query->have_posts() ) :
 							<?php endif; ?>
 						<?php endforeach; ?>
 					</dl>
+
+					<a class="me-card__link" href="<?php the_permalink(); ?>">
+						<?php esc_html_e( 'View experience', 'mountain-experience' ); ?>
+					</a>
 				</div>
 			</article>
 

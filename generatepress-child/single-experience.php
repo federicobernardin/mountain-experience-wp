@@ -14,10 +14,18 @@ get_header();
 while ( have_posts() ) :
 	the_post();
 
-	$post_id        = get_the_ID();
-	$hero_image_url = get_the_post_thumbnail_url( $post_id, 'full' );
-	$excerpt        = has_excerpt() ? get_the_excerpt() : '';
-	$gpx_url        = me_get_file_url( me_get_experience_field( 'gpx_file', $post_id ) );
+	$post_id          = get_the_ID();
+	$hero_image_url   = get_the_post_thumbnail_url( $post_id, 'full' );
+	$excerpt          = has_excerpt() ? get_the_excerpt() : '';
+	$gpx_url          = me_get_file_url( me_get_experience_field( 'gpx_file', $post_id ) );
+	$difficulty       = '';
+	$difficulty_terms = get_the_terms( $post_id, 'difficulty' );
+
+	if ( ! empty( $difficulty_terms ) && ! is_wp_error( $difficulty_terms ) ) {
+		$difficulty_term = reset( $difficulty_terms );
+		$difficulty      = $difficulty_term->name;
+	}
+
 	$technical_data = array(
 		array(
 			'label' => __( 'Dislivello', 'mountain-experience' ),
@@ -38,6 +46,28 @@ while ( have_posts() ) :
 		array(
 			'label' => __( 'Partenza', 'mountain-experience' ),
 			'value' => me_format_field_value( me_get_experience_field( 'starting_point', $post_id ) ),
+		),
+	);
+	$summary_data   = array(
+		array(
+			'label' => __( 'Difficulty', 'mountain-experience' ),
+			'value' => $difficulty,
+		),
+		array(
+			'label' => __( 'Elevation gain', 'mountain-experience' ),
+			'value' => me_format_field_value( me_get_experience_field( 'elevation_gain', $post_id ), 'm' ),
+		),
+		array(
+			'label' => __( 'Duration', 'mountain-experience' ),
+			'value' => me_format_duration( me_get_experience_field( 'duration', $post_id ) ),
+		),
+		array(
+			'label' => __( 'Length', 'mountain-experience' ),
+			'value' => me_format_field_value( me_get_experience_field( 'length', $post_id ), 'km' ),
+		),
+		array(
+			'label' => __( 'Max altitude', 'mountain-experience' ),
+			'value' => me_format_field_value( me_get_experience_field( 'max_altitude', $post_id ), 'm' ),
 		),
 	);
 	?>
@@ -70,6 +100,19 @@ while ( have_posts() ) :
 				<?php if ( $excerpt ) : ?>
 					<p class="me-experience__subtitle"><?php echo esc_html( $excerpt ); ?></p>
 				<?php endif; ?>
+			</div>
+		</section>
+
+		<section class="me-summary-bar" aria-label="<?php esc_attr_e( 'Experience summary', 'mountain-experience' ); ?>">
+			<div class="me-summary-bar__inner">
+				<?php foreach ( $summary_data as $item ) : ?>
+					<?php if ( $item['value'] ) : ?>
+						<div class="me-summary-item">
+							<span class="me-summary-item__label"><?php echo esc_html( $item['label'] ); ?></span>
+							<strong class="me-summary-item__value"><?php echo esc_html( $item['value'] ); ?></strong>
+						</div>
+					<?php endif; ?>
+				<?php endforeach; ?>
 			</div>
 		</section>
 
