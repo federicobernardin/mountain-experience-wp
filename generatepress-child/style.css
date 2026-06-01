@@ -1007,3 +1007,166 @@ a {
 		will-change: auto;
 	}
 }
+
+/* =========================================================
+   TUNING - Final card balance
+   ========================================================= */
+
+/* Less dark overlay on card image */
+.me-card__image::after {
+	background:
+		linear-gradient(
+			180deg,
+			rgba(24, 34, 29, 0.20) 0%,
+			rgba(24, 34, 29, 0.00) 42%,
+			rgba(24, 34, 29, 0.46) 100%
+		);
+}
+
+/* Softer technical badges over image */
+.me-card__image-fact {
+	min-width: 82px;
+	padding: 7px 10px;
+	border-color: rgba(255, 255, 255, 0.28);
+	border-radius: 13px;
+	background: rgba(36, 69, 54, 0.82);
+	box-shadow: 0 8px 20px rgba(0, 0, 0, 0.14);
+}
+
+.me-card__image-fact-label {
+	font-size: 0.5rem;
+	letter-spacing: 0.07em;
+}
+
+.me-card__image-fact-value {
+	font-size: 0.76rem;
+}
+
+/* Slightly smaller content area */
+.me-card__content {
+	padding: 22px;
+	gap: 14px;
+}
+
+/* More elegant title size */
+.me-card__title {
+	font-size: clamp(1.16rem, 1.42vw, 1.42rem);
+	line-height: 1.2;
+	letter-spacing: -0.018em;
+}
+
+.me-card__excerpt {
+	font-size: 0.88rem;
+	line-height: 1.55;
+}
+
+/* Less dominant CTA */
+.me-card__cta,
+.me-card__cta:visited {
+	min-height: 42px;
+	border-radius: 12px;
+	font-size: 0.82rem;
+}
+
+/* Slightly smaller activity badge */
+.me-card__badge {
+	min-height: 28px;
+	padding: 6px 11px;
+	font-size: 0.66rem;
+}
+
+/* Card radius a touch smaller */
+.me-card {
+	border-radius: 22px;
+}
+
+.me-card__image {
+	aspect-ratio: 16 / 9;
+}
+
+/* =========================================================
+   TUNING - Softer image technical data
+   ========================================================= */
+
+/* Technical data becomes one subtle glass bar */
+.me-card__image-facts {
+	left: 18px;
+	right: 18px;
+	bottom: 18px;
+	display: grid;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	gap: 0;
+	border: 1px solid rgba(255, 255, 255, 0.28);
+	border-radius: 16px;
+	background: rgba(24, 34, 29, 0.58);
+	backdrop-filter: blur(14px);
+	box-shadow: 0 12px 28px rgba(0, 0, 0, 0.18);
+	overflow: hidden;
+}
+
+.me-card__image-fact {
+	min-width: 0;
+	padding: 9px 12px;
+	border: 0;
+	border-right: 1px solid rgba(255, 255, 255, 0.18);
+	border-radius: 0;
+	background: transparent;
+	box-shadow: none;
+}
+
+.me-card__image-fact:last-child {
+	border-right: 0;
+}
+
+.me-card__image-fact-label {
+	margin-bottom: 4px;
+	color: rgba(255, 255, 255, 0.68);
+	font-size: 0.5rem;
+	font-weight: 800;
+	line-height: 1;
+	text-transform: uppercase;
+	letter-spacing: 0.07em;
+}
+
+.me-card__image-fact-value {
+	color: #ffffff;
+	font-size: 0.78rem;
+	font-weight: 850;
+	line-height: 1.1;
+}
+
+/* Less dark image overlay */
+.me-card__image::after {
+	background:
+		linear-gradient(
+			180deg,
+			rgba(24, 34, 29, 0.20) 0%,
+			rgba(24, 34, 29, 0.00) 42%,
+			rgba(24, 34, 29, 0.50) 100%
+		);
+}
+
+@media (max-width: 480px) {
+	.me-card__image-facts {
+		left: 12px;
+		right: 12px;
+		bottom: 12px;
+	}
+
+	.me-card__image-fact {
+		padding: 8px 9px;
+	}
+
+	.me-card__image-fact-label {
+		font-size: 0.46rem;
+	}
+
+	.me-card__image-fact-value {
+		font-size: 0.7rem;
+	}
+}
+
+/* Hide stale no-results message when results are present */
+.me-results:not(:empty) ~ .me-no-results {
+	display: none !important;
+}

@@ -85,7 +85,7 @@ if ( $query->have_posts() ) :
 					<?php endif; ?>
 
 					<a class="me-card__cta" href="<?php the_permalink(); ?>">
-						<?php esc_html_e( 'View experience', 'mountain-experience' ); ?>
+						<?php esc_html_e( 'Read experience', 'mountain-experience' ); ?>
 					</a>
 
 				</div>
