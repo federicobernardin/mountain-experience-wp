@@ -1,0 +1,420 @@
+/*
+ Theme Name: Mountain Experience GeneratePress Child
+ Theme URI: https://mountain-experience.blog/
+ Description: Child theme GeneratePress per il sito mountain-experience.blog.
+ Author: Mountain Experience
+ Template: generatepress
+ Version: 1.0.0
+ Text Domain: mountain-experience
+*/
+
+:root {
+	--me-ink: #18221d;
+	--me-muted: #607065;
+	--me-line: #d8dfd9;
+	--me-paper: #f7f6f1;
+	--me-surface: #ffffff;
+	--me-forest: #244536;
+	--me-moss: #6f865a;
+	--me-rust: #b75d32;
+	--me-sky: #dfe9ee;
+	--me-shadow: 0 18px 50px rgba(24, 34, 29, 0.14);
+}
+
+.single-experience .site-content,
+.post-type-archive-experience .site-content {
+	background: var(--me-paper);
+}
+
+.me-experience {
+	color: var(--me-ink);
+	background: var(--me-paper);
+}
+
+.me-experience__hero {
+	position: relative;
+	min-height: clamp(420px, 74vh, 760px);
+	display: flex;
+	align-items: flex-end;
+	overflow: hidden;
+	isolation: isolate;
+	background: var(--me-forest);
+}
+
+.me-experience__hero::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	z-index: -1;
+	background:
+		linear-gradient(180deg, rgba(12, 21, 17, 0.12) 0%, rgba(12, 21, 17, 0.78) 82%),
+		linear-gradient(90deg, rgba(12, 21, 17, 0.72) 0%, rgba(12, 21, 17, 0.08) 58%);
+}
+
+.me-experience__hero-image {
+	position: absolute;
+	inset: 0;
+	z-index: -2;
+	background-position: center;
+	background-size: cover;
+	transform: scale(1.04);
+	animation: me-ken-burns 22s ease-out forwards;
+}
+
+@keyframes me-ken-burns {
+	from {
+		transform: scale(1.04) translate3d(0, 0, 0);
+	}
+
+	to {
+		transform: scale(1.18) translate3d(-1.5%, -1.5%, 0);
+	}
+}
+
+.me-experience__hero-inner {
+	width: min(1180px, calc(100% - 40px));
+	margin: 0 auto;
+	padding: 80px 0 72px;
+}
+
+.me-experience__kicker {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px;
+	margin-bottom: 18px;
+}
+
+.me-chip,
+.me-taxonomy-pill {
+	display: inline-flex;
+	align-items: center;
+	min-height: 32px;
+	padding: 6px 12px;
+	border-radius: 999px;
+	font-size: 0.78rem;
+	font-weight: 700;
+	line-height: 1;
+	text-transform: uppercase;
+	letter-spacing: 0;
+}
+
+.me-chip {
+	color: #ffffff;
+	background: rgba(255, 255, 255, 0.16);
+	border: 1px solid rgba(255, 255, 255, 0.3);
+	backdrop-filter: blur(10px);
+}
+
+.me-experience__title {
+	max-width: 880px;
+	margin: 0;
+	color: #ffffff;
+	font-size: clamp(2.6rem, 6vw, 5.8rem);
+	line-height: 0.96;
+	letter-spacing: 0;
+	text-wrap: balance;
+}
+
+.me-experience__subtitle {
+	max-width: 720px;
+	margin: 22px 0 0;
+	color: rgba(255, 255, 255, 0.88);
+	font-size: clamp(1.05rem, 2vw, 1.35rem);
+	line-height: 1.55;
+}
+
+.me-experience__layout {
+	width: min(1180px, calc(100% - 40px));
+	margin: 0 auto;
+	padding: clamp(46px, 7vw, 88px) 0;
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) minmax(300px, 380px);
+	gap: clamp(34px, 6vw, 72px);
+	align-items: start;
+}
+
+.me-experience__content {
+	min-width: 0;
+	font-size: 1.08rem;
+	line-height: 1.78;
+}
+
+.me-experience__content > *:first-child {
+	margin-top: 0;
+}
+
+.me-experience__content img {
+	border-radius: 8px;
+}
+
+.me-experience__meta {
+	position: sticky;
+	top: 32px;
+	display: grid;
+	gap: 18px;
+}
+
+.me-panel {
+	border: 1px solid var(--me-line);
+	border-radius: 8px;
+	background: var(--me-surface);
+	box-shadow: var(--me-shadow);
+	overflow: hidden;
+}
+
+.me-panel__header {
+	padding: 22px 24px 0;
+}
+
+.me-panel__title {
+	margin: 0;
+	font-size: 1.05rem;
+	line-height: 1.2;
+}
+
+.me-data-list {
+	display: grid;
+	margin: 0;
+	padding: 12px 24px 24px;
+}
+
+.me-data-row {
+	display: grid;
+	grid-template-columns: 1fr auto;
+	gap: 18px;
+	align-items: baseline;
+	padding: 15px 0;
+	border-bottom: 1px solid var(--me-line);
+}
+
+.me-data-row:last-child {
+	border-bottom: 0;
+}
+
+.me-data-row dt {
+	color: var(--me-muted);
+	font-size: 0.88rem;
+	font-weight: 700;
+}
+
+.me-data-row dd {
+	margin: 0;
+	font-size: 1rem;
+	font-weight: 800;
+	text-align: right;
+}
+
+.me-taxonomy-list {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px;
+	padding: 18px 24px 24px;
+}
+
+.me-taxonomy-pill {
+	color: var(--me-forest);
+	background: var(--me-sky);
+}
+
+.me-gpx-link {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 48px;
+	margin: 0 24px 24px;
+	padding: 12px 16px;
+	border-radius: 6px;
+	color: #ffffff;
+	background: var(--me-rust);
+	font-weight: 800;
+	text-decoration: none;
+}
+
+.me-gpx-link:hover,
+.me-gpx-link:focus {
+	color: #ffffff;
+	background: #934627;
+}
+
+.me-results {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+	gap: 24px;
+}
+
+.me-card {
+	display: grid;
+	grid-template-rows: auto 1fr;
+	min-height: 100%;
+	border: 1px solid var(--me-line);
+	border-radius: 8px;
+	overflow: hidden;
+	background: var(--me-surface);
+	box-shadow: 0 14px 38px rgba(24, 34, 29, 0.1);
+	transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.me-card:hover,
+.me-card:focus-within {
+	transform: translateY(-3px);
+	box-shadow: 0 18px 48px rgba(24, 34, 29, 0.16);
+}
+
+.me-card__image {
+	display: block;
+	aspect-ratio: 4 / 3;
+	background: var(--me-sky);
+	overflow: hidden;
+}
+
+.me-card__image img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	transition: transform 240ms ease;
+}
+
+.me-card:hover .me-card__image img,
+.me-card:focus-within .me-card__image img {
+	transform: scale(1.04);
+}
+
+.me-card__body {
+	display: grid;
+	gap: 14px;
+	padding: 20px;
+}
+
+.me-card__title {
+	margin: 0;
+	font-size: 1.2rem;
+	line-height: 1.25;
+}
+
+.me-card__title a {
+	color: var(--me-ink);
+	text-decoration: none;
+}
+
+.me-card__title a:hover,
+.me-card__title a:focus {
+	color: var(--me-rust);
+}
+
+.me-card__excerpt {
+	margin: 0;
+	color: var(--me-muted);
+	font-size: 0.95rem;
+	line-height: 1.55;
+}
+
+.me-card__facts {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 10px;
+	margin: 0;
+}
+
+.me-card__fact {
+	padding: 10px;
+	border-radius: 6px;
+	background: var(--me-paper);
+}
+
+.me-card__fact dt {
+	color: var(--me-muted);
+	font-size: 0.72rem;
+	font-weight: 800;
+	text-transform: uppercase;
+}
+
+.me-card__fact dd {
+	margin: 3px 0 0;
+	font-size: 0.95rem;
+	font-weight: 800;
+}
+
+.me-no-results {
+	padding: 28px;
+	border: 1px solid var(--me-line);
+	border-radius: 8px;
+	background: var(--me-surface);
+}
+
+.me-pagination {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+	justify-content: center;
+	margin-top: 34px;
+}
+
+.me-pagination .page-numbers {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-width: 40px;
+	min-height: 40px;
+	padding: 8px 12px;
+	border: 1px solid var(--me-line);
+	border-radius: 6px;
+	color: var(--me-ink);
+	background: var(--me-surface);
+	font-weight: 800;
+	text-decoration: none;
+}
+
+.me-pagination .page-numbers.current,
+.me-pagination .page-numbers:hover,
+.me-pagination .page-numbers:focus {
+	color: #ffffff;
+	background: var(--me-forest);
+	border-color: var(--me-forest);
+}
+
+@media (max-width: 860px) {
+	.me-experience__layout {
+		grid-template-columns: 1fr;
+	}
+
+	.me-experience__meta {
+		position: static;
+	}
+}
+
+@media (max-width: 560px) {
+	.me-experience__hero-inner,
+	.me-experience__layout {
+		width: min(100% - 28px, 1180px);
+	}
+
+	.me-experience__hero {
+		min-height: 520px;
+	}
+
+	.me-experience__title {
+		font-size: clamp(2.3rem, 16vw, 4.4rem);
+	}
+
+	.me-data-row {
+		grid-template-columns: 1fr;
+		gap: 5px;
+	}
+
+	.me-data-row dd {
+		text-align: left;
+	}
+
+	.me-card__facts {
+		grid-template-columns: 1fr;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.me-experience__hero-image,
+	.me-card,
+	.me-card__image img {
+		animation: none;
+		transition: none;
+	}
+}
