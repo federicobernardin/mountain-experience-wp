@@ -16,8 +16,10 @@ if ( $query->have_posts() ) :
 		while ( $query->have_posts() ) :
 			$query->the_post();
 
-			$post_id = get_the_ID();
-			$facts   = array(
+			$post_id        = get_the_ID();
+			$activity_terms = get_the_terms( $post_id, 'activity_type' );
+
+			$overlay_facts = array(
 				array(
 					'label' => __( 'Dislivello', 'mountain-experience' ),
 					'value' => me_format_field_value( me_get_experience_field( 'elevation_gain', $post_id ), 'm' ),
@@ -30,60 +32,64 @@ if ( $query->have_posts() ) :
 					'label' => __( 'Lunghezza', 'mountain-experience' ),
 					'value' => me_format_field_value( me_get_experience_field( 'length', $post_id ), 'km' ),
 				),
-				array(
-					'label' => __( 'Quota max', 'mountain-experience' ),
-					'value' => me_format_field_value( me_get_experience_field( 'max_altitude', $post_id ), 'm' ),
-				),
 			);
 			?>
 
 			<article <?php post_class( 'me-card' ); ?>>
-				<a class="me-card__image" href="<?php the_permalink(); ?>" aria-label="<?php the_title_attribute(); ?>">
-					<span class="me-card__badge-wrap">
-						<?php
-						$activity_terms = get_the_terms( $post_id, 'activity_type' );
 
-						if ( ! empty( $activity_terms ) && ! is_wp_error( $activity_terms ) ) {
-							foreach ( $activity_terms as $term ) {
-								printf( '<span class="me-card__badge">%s</span>', esc_html( $term->name ) );
-							}
-						}
-						?>
-					</span>
+				<a class="me-card__media" href="<?php the_permalink(); ?>" aria-label="<?php the_title_attribute(); ?>">
 
-					<?php
-					if ( has_post_thumbnail() ) {
-						the_post_thumbnail( 'large' );
-					} else {
-						echo '<span class="me-card__image-placeholder" aria-hidden="true"></span>';
-					}
-					?>
+					<div class="me-card__image">
+						<?php if ( has_post_thumbnail() ) : ?>
+							<?php the_post_thumbnail( 'large' ); ?>
+						<?php else : ?>
+							<div class="me-card__placeholder">
+								<span>Mountain Experience</span>
+							</div>
+						<?php endif; ?>
+					</div>
+
+					<?php if ( ! empty( $activity_terms ) && ! is_wp_error( $activity_terms ) ) : ?>
+						<div class="me-card__badges" aria-label="<?php esc_attr_e( 'Activity type', 'mountain-experience' ); ?>">
+							<?php foreach ( $activity_terms as $term ) : ?>
+								<span class="me-card__badge me-card__badge--activity"><?php echo esc_html( $term->name ); ?></span>
+							<?php endforeach; ?>
+						</div>
+					<?php endif; ?>
+
+					<div class="me-card__image-facts" aria-label="<?php esc_attr_e( 'Experience technical data', 'mountain-experience' ); ?>">
+						<?php foreach ( $overlay_facts as $fact ) : ?>
+							<?php if ( ! empty( $fact['value'] ) ) : ?>
+								<span class="me-card__image-fact">
+									<span class="me-card__image-fact-label"><?php echo esc_html( $fact['label'] ); ?></span>
+									<strong class="me-card__image-fact-value"><?php echo esc_html( $fact['value'] ); ?></strong>
+								</span>
+							<?php endif; ?>
+						<?php endforeach; ?>
+					</div>
+
 				</a>
 
-				<div class="me-card__body">
+				<div class="me-card__content">
+
 					<h2 class="me-card__title">
-						<a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
+						<a href="<?php the_permalink(); ?>">
+							<?php the_title(); ?>
+						</a>
 					</h2>
 
 					<?php if ( has_excerpt() ) : ?>
-						<p class="me-card__excerpt"><?php echo esc_html( wp_trim_words( get_the_excerpt(), 22 ) ); ?></p>
+						<p class="me-card__excerpt">
+							<?php echo esc_html( wp_trim_words( get_the_excerpt(), 30 ) ); ?>
+						</p>
 					<?php endif; ?>
 
-					<dl class="me-card__facts" aria-label="<?php esc_attr_e( 'Experience technical data', 'mountain-experience' ); ?>">
-						<?php foreach ( $facts as $fact ) : ?>
-							<?php if ( $fact['value'] ) : ?>
-								<div class="me-card__fact">
-									<dt><?php echo esc_html( $fact['label'] ); ?></dt>
-									<dd><?php echo esc_html( $fact['value'] ); ?></dd>
-								</div>
-							<?php endif; ?>
-						<?php endforeach; ?>
-					</dl>
-
-					<a class="me-card__link" href="<?php the_permalink(); ?>">
+					<a class="me-card__cta" href="<?php the_permalink(); ?>">
 						<?php esc_html_e( 'View experience', 'mountain-experience' ); ?>
 					</a>
+
 				</div>
+
 			</article>
 
 			<?php

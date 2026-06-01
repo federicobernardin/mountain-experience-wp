@@ -29,6 +29,20 @@ function me_child_enqueue_styles() {
 	);
 }
 
+add_action( 'wp_enqueue_scripts', 'me_child_enqueue_scripts' );
+/**
+ * Load child theme scripts.
+ */
+function me_child_enqueue_scripts() {
+	wp_enqueue_script(
+		'me-filters-accordion',
+		get_stylesheet_directory_uri() . '/assets/js/filters-accordion.js',
+		array(),
+		wp_get_theme()->get( 'Version' ),
+		true
+	);
+}
+
 add_action( 'init', 'me_register_experience_content_types' );
 /**
  * Register the experience CPT and its taxonomies.
