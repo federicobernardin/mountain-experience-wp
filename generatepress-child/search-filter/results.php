@@ -19,17 +19,17 @@ if ( $query->have_posts() ) :
 			$post_id        = get_the_ID();
 			$activity_terms = get_the_terms( $post_id, 'activity_type' );
 
-			$overlay_facts = array(
+			$image_facts = array(
 				array(
-					'label' => __( 'Dislivello', 'mountain-experience' ),
+					'label' => me_translate( 'Dislivello' ),
 					'value' => me_format_field_value( me_get_experience_field( 'elevation_gain', $post_id ), 'm' ),
 				),
 				array(
-					'label' => __( 'Durata', 'mountain-experience' ),
+					'label' => me_translate( 'Durata' ),
 					'value' => me_format_duration( me_get_experience_field( 'duration', $post_id ) ),
 				),
 				array(
-					'label' => __( 'Lunghezza', 'mountain-experience' ),
+					'label' => me_translate( 'Lunghezza' ),
 					'value' => me_format_field_value( me_get_experience_field( 'length', $post_id ), 'km' ),
 				),
 			);
@@ -50,15 +50,15 @@ if ( $query->have_posts() ) :
 					</div>
 
 					<?php if ( ! empty( $activity_terms ) && ! is_wp_error( $activity_terms ) ) : ?>
-						<div class="me-card__badges" aria-label="<?php esc_attr_e( 'Activity type', 'mountain-experience' ); ?>">
+						<div class="me-card__badges" aria-label="<?php echo esc_attr( me_translate( 'Activity type' ) ); ?>">
 							<?php foreach ( $activity_terms as $term ) : ?>
-								<span class="me-card__badge me-card__badge--activity"><?php echo esc_html( $term->name ); ?></span>
+								<span class="me-card__badge"><?php echo esc_html( $term->name ); ?></span>
 							<?php endforeach; ?>
 						</div>
 					<?php endif; ?>
 
-					<div class="me-card__image-facts" aria-label="<?php esc_attr_e( 'Experience technical data', 'mountain-experience' ); ?>">
-						<?php foreach ( $overlay_facts as $fact ) : ?>
+					<div class="me-card__image-facts" aria-label="<?php echo esc_attr( me_translate( 'Experience technical data' ) ); ?>">
+						<?php foreach ( $image_facts as $fact ) : ?>
 							<?php if ( ! empty( $fact['value'] ) ) : ?>
 								<span class="me-card__image-fact">
 									<span class="me-card__image-fact-label"><?php echo esc_html( $fact['label'] ); ?></span>
@@ -85,7 +85,7 @@ if ( $query->have_posts() ) :
 					<?php endif; ?>
 
 					<a class="me-card__cta" href="<?php the_permalink(); ?>">
-						<?php esc_html_e( 'Read experience', 'mountain-experience' ); ?>
+						<?php echo esc_html( me_translate( 'Read experience' ) ); ?>
 					</a>
 
 				</div>
@@ -98,7 +98,7 @@ if ( $query->have_posts() ) :
 	</div>
 
 	<?php if ( $query->max_num_pages > 1 ) : ?>
-		<nav class="me-pagination" aria-label="<?php esc_attr_e( 'Results pagination', 'mountain-experience' ); ?>">
+		<nav class="me-pagination" aria-label="<?php echo esc_attr( me_translate( 'Results pagination' ) ); ?>">
 			<?php
 			echo wp_kses_post(
 				paginate_links(
@@ -116,7 +116,7 @@ if ( $query->have_posts() ) :
 else :
 	?>
 	<div class="me-no-results">
-		<p><?php esc_html_e( 'Nessuna experience trovata con i filtri selezionati.', 'mountain-experience' ); ?></p>
+		<p><?php echo esc_html( me_translate( 'Nessuna experience trovata con i filtri selezionati.' ) ); ?></p>
 	</div>
 	<?php
 endif;

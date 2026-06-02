@@ -9,6 +9,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+/* =========================================================
+   Assets
+   ========================================================= */
+
 add_action( 'wp_enqueue_scripts', 'me_child_enqueue_styles' );
 /**
  * Load GeneratePress parent styles and child theme styles.
@@ -43,9 +47,13 @@ function me_child_enqueue_scripts() {
 	);
 }
 
+/* =========================================================
+   Custom Post Type and taxonomies
+   ========================================================= */
+
 add_action( 'init', 'me_register_experience_content_types' );
 /**
- * Register the experience CPT and its taxonomies.
+ * Register the Experience CPT and its taxonomies.
  */
 function me_register_experience_content_types() {
 	register_post_type(
@@ -132,6 +140,10 @@ function me_register_experience_content_types() {
 		);
 	}
 }
+
+/* =========================================================
+   ACF helpers
+   ========================================================= */
 
 /**
  * Return an ACF field value when ACF is active, with post meta fallback.
@@ -238,6 +250,10 @@ function me_get_file_url( $file ) {
 	return '';
 }
 
+/* =========================================================
+   Template helpers
+   ========================================================= */
+
 /**
  * Render taxonomy terms as small pills.
  *
@@ -260,4 +276,124 @@ function me_the_taxonomy_pills( $post_id, $taxonomies ) {
 			);
 		}
 	}
+}
+
+/* =========================================================
+   Polylang helpers and strings
+   ========================================================= */
+
+/**
+ * Translate a theme string with Polylang fallback.
+ *
+ * @param string $string String to translate.
+ * @return string
+ */
+function me_translate( $string ) {
+	if ( function_exists( 'pll__' ) ) {
+		return pll__( $string );
+	}
+
+	return __( $string, 'mountain-experience' );
+}
+
+add_action( 'init', 'me_register_polylang_strings' );
+/**
+ * Register theme strings for Polylang translations.
+ */
+function me_register_polylang_strings() {
+	if ( ! function_exists( 'pll_register_string' ) ) {
+		return;
+	}
+
+	$strings = array(
+		// Archive / cards.
+		'Dislivello',
+		'Durata',
+		'Lunghezza',
+		'Quota max',
+		'Quota massima',
+		'Nessuna experience trovata con i filtri selezionati.',
+		'Read experience',
+		'View experience',
+		'Activity type',
+		'Experience technical data',
+		'Results pagination',
+
+		// Single experience.
+		'Dati tecnici',
+		'Caratteristiche',
+		'Partenza',
+		'Scarica traccia GPX',
+		'Difficulty',
+		'Elevation gain',
+		'Duration',
+		'Length',
+		'Max altitude',
+		'Experience overview',
+		'Experience categories',
+		'Experience summary',
+		'Technical details',
+		'Route features',
+		'Starting point',
+		'Download GPX track',
+
+		// Homepage.
+		'Mountain Experience',
+		'Esperienze, itinerari e racconti di montagna',
+		'Un archivio personale di escursioni, ferrate, arrampicate e scialpinistiche, filtrabile per difficoltà, dislivello, durata e caratteristiche del percorso.',
+		'Explore experiences',
+		'Selected routes',
+		'Esperienze in evidenza',
+		'Alcune attività selezionate tra le esperienze pubblicate, con dati tecnici e racconto dell’itinerario.',
+		'Choose your activity',
+		'Scegli il tipo di esperienza',
+		'Hiking',
+		'Escursioni e trekking',
+		'Via Ferrata',
+		'Percorsi attrezzati',
+		'Climbing',
+		'Arrampicate e vie',
+		'Ski Mountaineering',
+		'Scialpinismo',
+		'Trova l’esperienza più adatta a te',
+		'Usa i filtri per cercare attività in base a dislivello, difficoltà, esposizione, durata, lunghezza e materiale necessario.',
+		'Open experiences archive',
+		'Featured experiences',
+		'Choose your activity type',
+		'Find the right experience for you',
+	);
+
+	foreach ( $strings as $string ) {
+		pll_register_string(
+			'mountain-experience-' . sanitize_title( $string ),
+			$string,
+			'Mountain Experience Theme'
+		);
+	}
+}
+
+/* =========================================================
+   Search & Filter Pro + Polylang
+   ========================================================= */
+
+add_filter( 'sf_edit_query_args', 'me_search_filter_respect_polylang_language', 20 );
+/**
+ * Force Search & Filter Pro results to respect the current Polylang language.
+ *
+ * This prevents the English Experiences page from showing Italian experiences.
+ *
+ * @param array $query_args Search & Filter query arguments.
+ * @return array
+ */
+function me_search_filter_respect_polylang_language( $query_args ) {
+	if ( function_exists( 'pll_current_language' ) ) {
+		$current_language = pll_current_language( 'slug' );
+
+		if ( ! empty( $current_language ) ) {
+			$query_args['lang']             = $current_language;
+			$query_args['suppress_filters'] = false;
+		}
+	}
+
+	return $query_args;
 }

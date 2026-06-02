@@ -28,52 +28,53 @@ while ( have_posts() ) :
 
 	$technical_data = array(
 		array(
-			'label' => __( 'Dislivello', 'mountain-experience' ),
+			'label' => me_translate( 'Dislivello' ),
 			'value' => me_format_field_value( me_get_experience_field( 'elevation_gain', $post_id ), 'm' ),
 		),
 		array(
-			'label' => __( 'Durata', 'mountain-experience' ),
+			'label' => me_translate( 'Durata' ),
 			'value' => me_format_duration( me_get_experience_field( 'duration', $post_id ) ),
 		),
 		array(
-			'label' => __( 'Lunghezza', 'mountain-experience' ),
+			'label' => me_translate( 'Lunghezza' ),
 			'value' => me_format_field_value( me_get_experience_field( 'length', $post_id ), 'km' ),
 		),
 		array(
-			'label' => __( 'Quota massima', 'mountain-experience' ),
+			'label' => me_translate( 'Quota massima' ),
 			'value' => me_format_field_value( me_get_experience_field( 'max_altitude', $post_id ), 'm' ),
 		),
 		array(
-			'label' => __( 'Partenza', 'mountain-experience' ),
+			'label' => me_translate( 'Partenza' ),
 			'value' => me_format_field_value( me_get_experience_field( 'starting_point', $post_id ) ),
 		),
 	);
-	$summary_data   = array(
+
+	$summary_data = array(
 		array(
-			'label' => __( 'Difficulty', 'mountain-experience' ),
+			'label' => me_translate( 'Difficulty' ),
 			'value' => $difficulty,
 		),
 		array(
-			'label' => __( 'Elevation gain', 'mountain-experience' ),
+			'label' => me_translate( 'Elevation gain' ),
 			'value' => me_format_field_value( me_get_experience_field( 'elevation_gain', $post_id ), 'm' ),
 		),
 		array(
-			'label' => __( 'Duration', 'mountain-experience' ),
+			'label' => me_translate( 'Duration' ),
 			'value' => me_format_duration( me_get_experience_field( 'duration', $post_id ) ),
 		),
 		array(
-			'label' => __( 'Length', 'mountain-experience' ),
+			'label' => me_translate( 'Length' ),
 			'value' => me_format_field_value( me_get_experience_field( 'length', $post_id ), 'km' ),
 		),
 		array(
-			'label' => __( 'Max altitude', 'mountain-experience' ),
+			'label' => me_translate( 'Max altitude' ),
 			'value' => me_format_field_value( me_get_experience_field( 'max_altitude', $post_id ), 'm' ),
 		),
 	);
 	?>
 
 	<main id="primary" <?php post_class( 'me-experience' ); ?>>
-		<section class="me-experience__hero" aria-label="<?php esc_attr_e( 'Experience overview', 'mountain-experience' ); ?>">
+		<section class="me-experience__hero" aria-label="<?php echo esc_attr( me_translate( 'Experience overview' ) ); ?>">
 			<?php if ( $hero_image_url ) : ?>
 				<div
 					class="me-experience__hero-image"
@@ -83,7 +84,7 @@ while ( have_posts() ) :
 			<?php endif; ?>
 
 			<div class="me-experience__hero-inner">
-				<div class="me-experience__kicker" aria-label="<?php esc_attr_e( 'Experience categories', 'mountain-experience' ); ?>">
+				<div class="me-experience__kicker" aria-label="<?php echo esc_attr( me_translate( 'Experience categories' ) ); ?>">
 					<?php
 					$activity_terms = get_the_terms( $post_id, 'activity_type' );
 
@@ -103,7 +104,7 @@ while ( have_posts() ) :
 			</div>
 		</section>
 
-		<section class="me-summary-bar" aria-label="<?php esc_attr_e( 'Experience summary', 'mountain-experience' ); ?>">
+		<section class="me-summary-bar" aria-label="<?php echo esc_attr( me_translate( 'Experience summary' ) ); ?>">
 			<div class="me-summary-bar__inner">
 				<?php foreach ( $summary_data as $item ) : ?>
 					<?php if ( $item['value'] ) : ?>
@@ -121,10 +122,10 @@ while ( have_posts() ) :
 				<?php the_content(); ?>
 			</article>
 
-			<aside class="me-experience__meta" aria-label="<?php esc_attr_e( 'Experience technical data', 'mountain-experience' ); ?>">
+			<aside class="me-experience__meta" aria-label="<?php echo esc_attr( me_translate( 'Experience technical data' ) ); ?>">
 				<section class="me-panel">
 					<header class="me-panel__header">
-						<h2 class="me-panel__title"><?php esc_html_e( 'Dati tecnici', 'mountain-experience' ); ?></h2>
+						<h2 class="me-panel__title"><?php echo esc_html( me_translate( 'Dati tecnici' ) ); ?></h2>
 					</header>
 
 					<dl class="me-data-list">
@@ -140,14 +141,14 @@ while ( have_posts() ) :
 
 					<?php if ( $gpx_url ) : ?>
 						<a class="me-gpx-link" href="<?php echo esc_url( $gpx_url ); ?>" download>
-							<?php esc_html_e( 'Scarica traccia GPX', 'mountain-experience' ); ?>
+							<?php echo esc_html( me_translate( 'Scarica traccia GPX' ) ); ?>
 						</a>
 					<?php endif; ?>
 				</section>
 
 				<section class="me-panel">
 					<header class="me-panel__header">
-						<h2 class="me-panel__title"><?php esc_html_e( 'Caratteristiche', 'mountain-experience' ); ?></h2>
+						<h2 class="me-panel__title"><?php echo esc_html( me_translate( 'Caratteristiche' ) ); ?></h2>
 					</header>
 
 					<div class="me-taxonomy-list">
