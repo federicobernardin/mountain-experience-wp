@@ -20,6 +20,8 @@ while ( have_posts() ) :
 	$gpx_url          = me_get_file_url( me_get_experience_field( 'gpx_file', $post_id ) );
 	$difficulty       = '';
 	$difficulty_terms = get_the_terms( $post_id, 'difficulty' );
+	$content          = get_the_content();
+	$content_has_gallery = has_shortcode( $content, 'foogallery' ) || has_shortcode( $content, 'gallery' );
 
 	if ( ! empty( $difficulty_terms ) && ! is_wp_error( $difficulty_terms ) ) {
 		$difficulty_term = reset( $difficulty_terms );
@@ -71,12 +73,9 @@ while ( have_posts() ) :
 			'value' => me_format_field_value( me_get_experience_field( 'max_altitude', $post_id ), 'm' ),
 		),
 	);
-
-	$content_has_gallery = has_shortcode( get_the_content(), 'foogallery' ) || has_shortcode( get_the_content(), 'gallery' );
 	?>
 
 	<main id="primary" <?php post_class( 'me-experience' ); ?>>
-
 		<section class="me-experience__hero" aria-label="<?php echo esc_attr( me_translate( 'Experience overview' ) ); ?>">
 			<?php if ( $hero_image_url ) : ?>
 				<div
@@ -137,6 +136,10 @@ while ( have_posts() ) :
 
 		<div id="description" class="me-experience__layout">
 			<article class="me-experience__content">
+				<?php if ( $content_has_gallery ) : ?>
+					<div id="experience-gallery" class="me-gallery-anchor" aria-hidden="true"></div>
+				<?php endif; ?>
+
 				<?php the_content(); ?>
 			</article>
 
@@ -240,7 +243,6 @@ while ( have_posts() ) :
 				</div>
 			</section>
 		<?php endif; ?>
-
 	</main>
 
 	<?php

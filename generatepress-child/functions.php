@@ -338,7 +338,7 @@ function me_register_polylang_strings() {
 		return;
 	}
 
-	$strings = array(
+		$strings = array(
 		// Archive / cards.
 		'Dislivello',
 		'Durata',
@@ -368,9 +368,9 @@ function me_register_polylang_strings() {
 		'Technical details',
 		'Route features',
 		'Starting point',
-		'Download GPX track',
 
 		// Homepage.
+		'Download GPX track',
 		'Mountain Experience',
 		'Esperienze, itinerari e racconti di montagna',
 		'Un archivio personale di escursioni, ferrate, arrampicate e scialpinistiche, filtrabile per difficoltà, dislivello, durata e caratteristiche del percorso.',
@@ -393,9 +393,9 @@ function me_register_polylang_strings() {
 		'Open experiences archive',
 		'Featured experiences',
 		'Choose your activity type',
-		'Find the right experience for you',
 
-		//map
+		// Route map.
+		'Find the right experience for you',
 		'Mappa del percorso',
 		'Profilo altimetrico',
 		'Route map',
@@ -405,17 +405,13 @@ function me_register_polylang_strings() {
 		'Distance',
 		'Elevation',
 		'Impossibile caricare la traccia GPX.',
+
+		// Sticky experience menu and legend.
 		'GPX track could not be loaded.',
-
-		//sticky experience menu
 		'Experience navigation',
 		'Descrizione',
 		'Mappa',
-
-		//tooltip in single experience
-		'Experience navigation',
-		'Descrizione',
-		'Mappa',
+		'Gallery',
 		'Legenda caratteristiche',
 		'Legenda',
 		'Difficoltà: T = Turistico, E = Escursionistico, EE = Escursionisti esperti, EEA = Escursionisti esperti con attrezzatura.',
