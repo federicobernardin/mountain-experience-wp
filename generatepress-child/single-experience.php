@@ -157,6 +157,43 @@ while ( have_posts() ) :
 				</section>
 			</aside>
 		</div>
+				<?php if ( $gpx_url ) : ?>
+			<section class="me-route-section" aria-label="<?php echo esc_attr( me_translate( 'Mappa del percorso' ) ); ?>">
+				<div class="me-route-section__inner">
+
+					<div class="me-route-section__header">
+						<p class="me-route-section__kicker">
+							<?php echo esc_html( me_translate( 'Route map' ) ); ?>
+						</p>
+
+						<h2 class="me-route-section__title">
+							<?php echo esc_html( me_translate( 'Mappa del percorso' ) ); ?>
+						</h2>
+					</div>
+
+					<div
+						class="me-route-map"
+						data-gpx-url="<?php echo esc_url( $gpx_url ); ?>"
+						data-distance-label="<?php echo esc_attr( me_translate( 'Distanza' ) ); ?>"
+						data-elevation-label="<?php echo esc_attr( me_translate( 'Quota' ) ); ?>"
+						data-error-label="<?php echo esc_attr( me_translate( 'Impossibile caricare la traccia GPX.' ) ); ?>"
+					>
+						<div class="me-route-map__canvas"></div>
+
+						<div class="me-route-profile">
+							<div class="me-route-profile__header">
+								<h3><?php echo esc_html( me_translate( 'Profilo altimetrico' ) ); ?></h3>
+							</div>
+
+							<div class="me-route-profile__chart-wrap">
+								<canvas class="me-route-profile__chart"></canvas>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</section>
+		<?php endif; ?>
 	</main>
 
 	<?php

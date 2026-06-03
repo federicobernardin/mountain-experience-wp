@@ -45,6 +45,39 @@ function me_child_enqueue_scripts() {
 		wp_get_theme()->get( 'Version' ),
 		true
 	);
+
+	if ( is_singular( 'experience' ) ) {
+		wp_enqueue_style(
+			'leaflet',
+			'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css',
+			array(),
+			'1.9.4'
+		);
+
+		wp_enqueue_script(
+			'leaflet',
+			'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js',
+			array(),
+			'1.9.4',
+			true
+		);
+
+		wp_enqueue_script(
+			'chart-js',
+			'https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js',
+			array(),
+			'4.4.1',
+			true
+		);
+
+		wp_enqueue_script(
+			'me-experience-map',
+			get_stylesheet_directory_uri() . '/assets/js/experience-map.js',
+			array( 'leaflet', 'chart-js' ),
+			wp_get_theme()->get( 'Version' ),
+			true
+		);
+	}
 }
 
 /* =========================================================
@@ -361,6 +394,18 @@ function me_register_polylang_strings() {
 		'Featured experiences',
 		'Choose your activity type',
 		'Find the right experience for you',
+
+		//map
+		'Mappa del percorso',
+		'Profilo altimetrico',
+		'Route map',
+		'Elevation profile',
+		'Distanza',
+		'Quota',
+		'Distance',
+		'Elevation',
+		'Impossibile caricare la traccia GPX.',
+		'GPX track could not be loaded.',
 	);
 
 	foreach ( $strings as $string ) {
@@ -396,4 +441,43 @@ function me_search_filter_respect_polylang_language( $query_args ) {
 	}
 
 	return $query_args;
+}
+
+/* =========================================================
+   Allow GPX uploads
+   ========================================================= */
+
+add_filter( 'upload_mimes', 'me_allow_gpx_uploads' );
+/**
+ * Allow GPX files in WordPress Media Library.
+ *
+ * @param array $mimes Allowed mime types.
+ * @return array
+ */
+function me_allow_gpx_uploads( $mimes ) {
+	$mimes['gpx'] = 'application/gpx+xml';
+
+	return $mimes;
+}
+
+add_filter( 'wp_check_filetype_and_ext', 'me_fix_gpx_filetype_check', 10, 5 );
+/**
+ * Help WordPress validate GPX files correctly.
+ *
+ * @param array       $data     File type data.
+ * @param string      $file     Full path to the file.
+ * @param string      $filename File name.
+ * @param string[]    $mimes    Allowed mime types.
+ * @param string|null $real_mime Real mime type.
+ * @return array
+ */
+function me_fix_gpx_filetype_check( $data, $file, $filename, $mimes, $real_mime ) {
+	$file_ext = pathinfo( $filename, PATHINFO_EXTENSION );
+
+	if ( 'gpx' === strtolower( $file_ext ) ) {
+		$data['ext']  = 'gpx';
+		$data['type'] = 'application/gpx+xml';
+	}
+
+	return $data;
 }
