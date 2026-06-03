@@ -4018,3 +4018,132 @@ body #masthead #site-navigation .main-nav ul li.lang-item a::after {
 		height: 220px;
 	}
 }
+
+/* =========================================================
+   SINGLE EXPERIENCE - Route map and elevation profile
+   ========================================================= */
+
+.me-route-section {
+	padding: clamp(72px, 9vw, 120px) 0;
+	background:
+		linear-gradient(180deg, rgba(246, 242, 234, 0) 0%, rgba(255, 255, 255, 0.42) 100%);
+}
+
+.me-route-section__inner {
+	width: min(1180px, calc(100% - 40px));
+	margin: 0 auto;
+}
+
+.me-route-section__header {
+	max-width: 760px;
+	margin-bottom: 34px;
+}
+
+.me-route-section__kicker {
+	margin: 0 0 12px;
+	color: var(--me-rust);
+	font-size: 0.72rem;
+	font-weight: 850;
+	line-height: 1;
+	text-transform: uppercase;
+	letter-spacing: 0.14em;
+}
+
+.me-route-section__title {
+	margin: 0;
+	color: var(--me-forest);
+	font-size: clamp(2rem, 3.5vw, 3.4rem);
+	line-height: 1.02;
+	font-weight: 850;
+	letter-spacing: -0.045em;
+}
+
+.me-route-map {
+	overflow: hidden;
+	border: 1px solid rgba(222, 216, 204, 0.92);
+	border-radius: 32px;
+	background: #ffffff;
+	box-shadow: 0 22px 58px rgba(24, 34, 29, 0.13);
+}
+
+.me-route-map__canvas {
+	width: 100%;
+	height: clamp(380px, 48vw, 580px);
+	background: var(--me-sky);
+}
+
+.me-route-profile {
+	padding: clamp(22px, 3vw, 34px);
+	background:
+		linear-gradient(180deg, #ffffff 0%, #fbfaf6 100%);
+	border-top: 1px solid rgba(222, 216, 204, 0.9);
+}
+
+.me-route-profile__header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 18px;
+}
+
+.me-route-profile__header h3 {
+	margin: 0;
+	color: var(--me-forest);
+	font-size: 0.86rem;
+	font-weight: 850;
+	line-height: 1;
+	text-transform: uppercase;
+	letter-spacing: 0.12em;
+}
+
+.me-route-profile__chart-wrap {
+	position: relative;
+	height: 250px;
+}
+
+.me-route-map__error {
+	margin: 0;
+	padding: 18px 22px;
+	color: #ffffff;
+	background: var(--me-rust);
+	font-size: 0.9rem;
+	font-weight: 800;
+}
+
+.leaflet-container {
+	font-family: inherit;
+}
+
+.leaflet-control-attribution {
+	font-size: 10px;
+}
+
+.leaflet-control-zoom a {
+	color: var(--me-forest) !important;
+}
+
+@media (max-width: 760px) {
+	.me-route-section {
+		padding: 64px 0;
+	}
+
+	.me-route-section__inner {
+		width: min(100% - 32px, 1180px);
+	}
+
+	.me-route-map {
+		border-radius: 24px;
+	}
+
+	.me-route-map__canvas {
+		height: 380px;
+	}
+
+	.me-route-profile {
+		padding: 20px 16px 24px;
+	}
+
+	.me-route-profile__chart-wrap {
+		height: 220px;
+	}
+}

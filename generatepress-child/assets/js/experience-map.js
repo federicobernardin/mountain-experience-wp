@@ -83,6 +83,43 @@
 		return closestIndex;
 	}
 
+	const verticalProfileLine = {
+		id: 'verticalProfileLine',
+		afterDatasetsDraw: function (chart) {
+			const activeElements = chart.getActiveElements();
+
+			if (!activeElements.length) {
+				return;
+			}
+
+			const activeElement = activeElements[0];
+			const meta = chart.getDatasetMeta(activeElement.datasetIndex);
+
+			if (!meta || !meta.data || !meta.data[activeElement.index]) {
+				return;
+			}
+
+			const point = meta.data[activeElement.index];
+			const ctx = chart.ctx;
+			const topY = chart.chartArea.top;
+			const bottomY = chart.chartArea.bottom;
+
+			ctx.save();
+			ctx.beginPath();
+			ctx.moveTo(point.x, topY);
+			ctx.lineTo(point.x, bottomY);
+			ctx.lineWidth = 2;
+			ctx.strokeStyle = 'rgba(183, 93, 50, 0.95)';
+			ctx.setLineDash([6, 6]);
+			ctx.stroke();
+			ctx.restore();
+		}
+	};
+
+	if (Chart && typeof Chart.register === 'function') {
+		Chart.register(verticalProfileLine);
+	}
+
 	function initRouteBlock(block) {
 		const gpxUrl = block.dataset.gpxUrl;
 		const distanceLabel = block.dataset.distanceLabel || 'Distance';
@@ -122,11 +159,25 @@
 
 				const latLngs = points.map((point) => [point.lat, point.lng]);
 
+				/*
+				 * White halo below the route.
+				 * It is added first, so the green route naturally stays above it.
+				 */
+				L.polyline(latLngs, {
+					color: '#ffffff',
+					weight: 9,
+					opacity: 0.72,
+					lineJoin: 'round',
+					lineCap: 'round',
+					interactive: false
+				}).addTo(map);
+
 				const routeLine = L.polyline(latLngs, {
-					color: '#b75d32',
-					weight: 4,
-					opacity: 0.95,
-					lineJoin: 'round'
+					color: '#c0392b',
+					weight: 5,
+					opacity: 0.96,
+					lineJoin: 'round',
+					lineCap: 'round'
 				}).addTo(map);
 
 				map.fitBounds(routeLine.getBounds(), {
@@ -137,7 +188,7 @@
 					radius: 8,
 					color: '#ffffff',
 					weight: 3,
-					fillColor: '#b75d32',
+					fillColor: '#c0392b',
 					fillOpacity: 1
 				}).addTo(map);
 
@@ -159,9 +210,14 @@
 							{
 								label: elevationLabel,
 								data,
+								borderColor: '#244536',
+								backgroundColor: 'rgba(36, 69, 54, 0.14)',
 								borderWidth: 2,
 								pointRadius: 0,
-								pointHoverRadius: 4,
+								pointHoverRadius: 5,
+								pointHoverBackgroundColor: '#b75d32',
+								pointHoverBorderColor: '#ffffff',
+								pointHoverBorderWidth: 3,
 								tension: 0.28,
 								fill: true
 							}
@@ -232,15 +288,13 @@
 					}
 				});
 
-				const canvas = chartElement;
-
-				canvas.addEventListener('touchmove', function (event) {
+				chartElement.addEventListener('touchmove', function (event) {
 					if (!event.touches.length) {
 						return;
 					}
 
 					const touch = event.touches[0];
-					const rect = canvas.getBoundingClientRect();
+					const rect = chartElement.getBoundingClientRect();
 					const x = touch.clientX - rect.left;
 					const chartArea = chart.chartArea;
 
@@ -276,8 +330,8 @@
 							}
 						],
 						{
-							x: touch.clientX,
-							y: touch.clientY
+							x: x,
+							y: chartArea.top
 						}
 					);
 
@@ -288,7 +342,9 @@
 					passive: false
 				});
 			})
-			.catch(() => {
+			.catch((error) => {
+				console.error('Mountain Experience GPX error:', error);
+
 				block.classList.add('has-error');
 				block.insertAdjacentHTML(
 					'beforeend',

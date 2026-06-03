@@ -157,7 +157,8 @@ while ( have_posts() ) :
 				</section>
 			</aside>
 		</div>
-				<?php if ( $gpx_url ) : ?>
+
+		<?php if ( $gpx_url ) : ?>
 			<section class="me-route-section" aria-label="<?php echo esc_attr( me_translate( 'Mappa del percorso' ) ); ?>">
 				<div class="me-route-section__inner">
 
