@@ -71,9 +71,12 @@ while ( have_posts() ) :
 			'value' => me_format_field_value( me_get_experience_field( 'max_altitude', $post_id ), 'm' ),
 		),
 	);
+
+	$content_has_gallery = has_shortcode( get_the_content(), 'foogallery' ) || has_shortcode( get_the_content(), 'gallery' );
 	?>
 
 	<main id="primary" <?php post_class( 'me-experience' ); ?>>
+
 		<section class="me-experience__hero" aria-label="<?php echo esc_attr( me_translate( 'Experience overview' ) ); ?>">
 			<?php if ( $hero_image_url ) : ?>
 				<div
@@ -117,7 +120,22 @@ while ( have_posts() ) :
 			</div>
 		</section>
 
-		<div class="me-experience__layout">
+		<nav class="me-experience-nav" aria-label="<?php echo esc_attr( me_translate( 'Experience navigation' ) ); ?>">
+			<div class="me-experience-nav__inner">
+				<a href="#description"><?php echo esc_html( me_translate( 'Descrizione' ) ); ?></a>
+
+				<?php if ( $gpx_url ) : ?>
+					<a href="#route-map"><?php echo esc_html( me_translate( 'Mappa' ) ); ?></a>
+					<a href="#route-profile"><?php echo esc_html( me_translate( 'Profilo altimetrico' ) ); ?></a>
+				<?php endif; ?>
+
+				<?php if ( $content_has_gallery ) : ?>
+					<a href="#experience-gallery"><?php echo esc_html( me_translate( 'Gallery' ) ); ?></a>
+				<?php endif; ?>
+			</div>
+		</nav>
+
+		<div id="description" class="me-experience__layout">
 			<article class="me-experience__content">
 				<?php the_content(); ?>
 			</article>
@@ -146,9 +164,36 @@ while ( have_posts() ) :
 					<?php endif; ?>
 				</section>
 
-				<section class="me-panel">
-					<header class="me-panel__header">
+				<section class="me-panel me-panel--taxonomy">
+					<header class="me-panel__header me-panel__header--with-info">
 						<h2 class="me-panel__title"><?php echo esc_html( me_translate( 'Caratteristiche' ) ); ?></h2>
+
+						<div class="me-info-popover">
+							<button
+								type="button"
+								class="me-info-popover__button"
+								aria-label="<?php echo esc_attr( me_translate( 'Legenda caratteristiche' ) ); ?>"
+								aria-describedby="me-features-legend"
+							>
+								i
+							</button>
+
+							<div id="me-features-legend" class="me-info-popover__content" role="tooltip">
+								<strong><?php echo esc_html( me_translate( 'Legenda' ) ); ?></strong>
+
+								<p>
+									<?php echo esc_html( me_translate( 'Difficoltà: T = Turistico, E = Escursionistico, EE = Escursionisti esperti, EEA = Escursionisti esperti con attrezzatura.' ) ); ?>
+								</p>
+
+								<p>
+									<?php echo esc_html( me_translate( 'Esposizione: indica l’orientamento prevalente del percorso.' ) ); ?>
+								</p>
+
+								<p>
+									<?php echo esc_html( me_translate( 'Materiale: indica l’attrezzatura consigliata o necessaria.' ) ); ?>
+								</p>
+							</div>
+						</div>
 					</header>
 
 					<div class="me-taxonomy-list">
@@ -159,7 +204,7 @@ while ( have_posts() ) :
 		</div>
 
 		<?php if ( $gpx_url ) : ?>
-			<section class="me-route-section" aria-label="<?php echo esc_attr( me_translate( 'Mappa del percorso' ) ); ?>">
+			<section id="route-map" class="me-route-section" aria-label="<?php echo esc_attr( me_translate( 'Mappa del percorso' ) ); ?>">
 				<div class="me-route-section__inner">
 
 					<div class="me-route-section__header">
@@ -181,7 +226,7 @@ while ( have_posts() ) :
 					>
 						<div class="me-route-map__canvas"></div>
 
-						<div class="me-route-profile">
+						<div id="route-profile" class="me-route-profile">
 							<div class="me-route-profile__header">
 								<h3><?php echo esc_html( me_translate( 'Profilo altimetrico' ) ); ?></h3>
 							</div>
@@ -195,6 +240,7 @@ while ( have_posts() ) :
 				</div>
 			</section>
 		<?php endif; ?>
+
 	</main>
 
 	<?php

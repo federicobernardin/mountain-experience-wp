@@ -406,6 +406,21 @@ function me_register_polylang_strings() {
 		'Elevation',
 		'Impossibile caricare la traccia GPX.',
 		'GPX track could not be loaded.',
+
+		//sticky experience menu
+		'Experience navigation',
+		'Descrizione',
+		'Mappa',
+
+		//tooltip in single experience
+		'Experience navigation',
+		'Descrizione',
+		'Mappa',
+		'Legenda caratteristiche',
+		'Legenda',
+		'Difficoltà: T = Turistico, E = Escursionistico, EE = Escursionisti esperti, EEA = Escursionisti esperti con attrezzatura.',
+		'Esposizione: indica l’orientamento prevalente del percorso.',
+		'Materiale: indica l’attrezzatura consigliata o necessaria.',
 	);
 
 	foreach ( $strings as $string ) {
