@@ -4154,11 +4154,11 @@ body #masthead #site-navigation .main-nav ul li.lang-item a::after {
    ========================================================= */
 
 :root {
-	--me-experience-sticky-offset: 96px;
+	--me-experience-sticky-offset: 70px;
 }
 
 body.admin-bar {
-	--me-experience-sticky-offset: 128px;
+	--me-experience-sticky-offset: 110px;
 }
 
 .single-experience #description,
