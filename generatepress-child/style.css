@@ -4476,3 +4476,255 @@ body.admin-bar {
 		width: min(300px, calc(100vw - 36px));
 	}
 }
+
+/* =========================================================
+   MOBILE HEADER MENU - clean GeneratePress dropdown
+   ========================================================= */
+
+@media (max-width: 768px) {
+	body #masthead {
+		position: sticky !important;
+		top: 0 !important;
+		z-index: 9999 !important;
+		background: #ffffff !important;
+		border-bottom: 1px solid rgba(222, 216, 204, 0.85) !important;
+		box-shadow: 0 8px 24px rgba(24, 34, 29, 0.06) !important;
+	}
+
+	body.admin-bar #masthead {
+		top: 46px !important;
+	}
+
+	body #masthead .inside-header {
+	position: relative !important;
+	min-height: 70px !important;
+	padding: 0 16px !important;
+	display: flex !important;
+	align-items: center !important;
+	justify-content: space-between !important;
+	gap: 10px !important;
+}
+
+body #masthead .site-branding,
+body #masthead .site-branding-container {
+	min-width: 0 !important;
+	flex: 1 1 auto !important;
+}
+
+body #masthead .site-logo {
+	flex: 0 0 auto !important;
+	margin-right: 8px !important;
+}
+
+body #masthead .site-logo img,
+body #masthead .header-image {
+	max-height: 44px !important;
+	width: auto !important;
+}
+
+body #masthead .main-title {
+	min-width: 0 !important;
+	font-size: 1.12rem !important;
+	line-height: 1.1 !important;
+	white-space: nowrap !important;
+	overflow: hidden !important;
+	text-overflow: ellipsis !important;
+}
+
+	/* Keep the navigation container inside the header */
+	body #masthead #site-navigation,
+	body #masthead .main-navigation,
+	body #masthead .main-navigation.toggled {
+		position: static !important;
+		width: auto !important;
+		margin: 0 0 0 auto !important;
+		padding: 0 !important;
+		display: flex !important;
+		align-items: center !important;
+		justify-content: flex-end !important;
+		background: transparent !important;
+		border: 0 !important;
+		box-shadow: none !important;
+		overflow: visible !important;
+	}
+
+	body #masthead #site-navigation .inside-navigation,
+	body #masthead .main-navigation .inside-navigation {
+		position: static !important;
+		display: flex !important;
+		align-items: center !important;
+		justify-content: flex-end !important;
+		background: transparent !important;
+		border: 0 !important;
+		box-shadow: none !important;
+	}
+
+	body #mobile-menu-control-wrapper {
+		display: flex !important;
+		align-items: center !important;
+		justify-content: flex-end !important;
+		margin-left: auto !important;
+	}
+
+body #mobile-menu-control-wrapper .menu-toggle,
+body #masthead .menu-toggle {
+	width: 48px !important;
+	height: 48px !important;
+	min-height: 48px !important;
+	flex: 0 0 48px !important;
+		padding: 0 !important;
+		border: 0 !important;
+		border-radius: 999px !important;
+		background: #edf1e6 !important;
+		color: var(--me-forest) !important;
+		font-size: 0 !important;
+		line-height: 1 !important;
+		box-shadow: none !important;
+	}
+
+	body #mobile-menu-control-wrapper .menu-toggle::before,
+	body #masthead .menu-toggle::before {
+		content: "☰" !important;
+		display: inline-flex !important;
+		align-items: center !important;
+		justify-content: center !important;
+		font-size: 1.35rem !important;
+		font-weight: 700 !important;
+		line-height: 1 !important;
+		color: var(--me-forest) !important;
+	}
+
+	/* Hide menu list when closed */
+	body #masthead #site-navigation:not(.toggled) .main-nav,
+	body #masthead .main-navigation:not(.toggled) .main-nav {
+		display: none !important;
+	}
+
+	/* Show menu list as dropdown when opened */
+	body #masthead #site-navigation.toggled .main-nav,
+	body #masthead .main-navigation.toggled .main-nav,
+	body #masthead #site-navigation.has-inline-mobile-toggle.toggled .main-nav {
+		position: absolute !important;
+		top: calc(100% + 10px) !important;
+		left: 18px !important;
+		right: 18px !important;
+		z-index: 9998 !important;
+		display: block !important;
+		width: auto !important;
+		margin: 0 !important;
+		padding: 14px !important;
+		border: 1px solid rgba(222, 216, 204, 0.95) !important;
+		border-radius: 24px !important;
+		background: #ffffff !important;
+		box-shadow: 0 22px 58px rgba(24, 34, 29, 0.18) !important;
+	}
+
+	body #masthead #site-navigation .main-nav > ul,
+	body #masthead .main-navigation .main-nav > ul,
+	body #masthead #primary-menu > ul {
+		width: 100% !important;
+		display: block !important;
+		margin: 0 !important;
+		padding: 0 !important;
+		border: 0 !important;
+		border-radius: 0 !important;
+		background: transparent !important;
+		box-shadow: none !important;
+	}
+
+	body #masthead #site-navigation .main-nav ul li,
+	body #masthead .main-navigation .main-nav ul li {
+		width: 100% !important;
+		display: block !important;
+		margin: 0 !important;
+		padding: 0 !important;
+		border: 0 !important;
+		background: transparent !important;
+		box-shadow: none !important;
+	}
+
+	body #masthead #site-navigation .main-nav ul li a,
+	body #masthead .main-navigation .main-nav ul li a {
+		width: 100% !important;
+		min-height: 48px !important;
+		display: flex !important;
+		align-items: center !important;
+		justify-content: center !important;
+		margin: 0 !important;
+		padding: 14px 16px !important;
+		border: 0 !important;
+		border-radius: 14px !important;
+		background: transparent !important;
+		color: var(--me-ink) !important;
+		font-size: 0.88rem !important;
+		font-weight: 850 !important;
+		line-height: 1.1 !important;
+		text-align: center !important;
+		text-transform: uppercase !important;
+		letter-spacing: 0.08em !important;
+		text-decoration: none !important;
+		box-shadow: none !important;
+	}
+
+	body #masthead #site-navigation .main-nav ul li a::before,
+	body #masthead #site-navigation .main-nav ul li a::after,
+	body #masthead .main-navigation .main-nav ul li a::before,
+	body #masthead .main-navigation .main-nav ul li a::after {
+		display: none !important;
+		content: none !important;
+	}
+
+	body #masthead #site-navigation .main-nav ul li a:hover,
+	body #masthead #site-navigation .main-nav ul li.current-menu-item > a,
+	body #masthead #site-navigation .main-nav ul li.current_page_item > a,
+	body #masthead .main-navigation .main-nav ul li a:hover,
+	body #masthead .main-navigation .main-nav ul li.current-menu-item > a,
+	body #masthead .main-navigation .main-nav ul li.current_page_item > a {
+		background: transparent !important;
+		color: var(--me-forest) !important;
+	}
+
+	body #masthead #site-navigation .main-nav ul li.current-menu-item:not(.lang-item) > a,
+	body #masthead #site-navigation .main-nav ul li.current_page_item:not(.lang-item) > a,
+	body #masthead .main-navigation .main-nav ul li.current-menu-item:not(.lang-item) > a,
+	body #masthead .main-navigation .main-nav ul li.current_page_item:not(.lang-item) > a {
+		text-decoration: underline !important;
+		text-decoration-thickness: 3px !important;
+		text-underline-offset: 8px !important;
+	}
+
+	/* Languages as small pills */
+	body #masthead #site-navigation .main-nav ul li.lang-item,
+	body #masthead .main-navigation .main-nav ul li.lang-item {
+		width: auto !important;
+		display: inline-flex !important;
+		margin: 10px 4px 0 !important;
+		padding: 0 !important;
+		border: 0 !important;
+		background: transparent !important;
+	}
+
+	body #masthead #site-navigation .main-nav ul li.lang-item:first-of-type,
+	body #masthead .main-navigation .main-nav ul li.lang-item:first-of-type {
+		margin-left: 0 !important;
+		padding-left: 0 !important;
+		border-left: 0 !important;
+	}
+
+	body #masthead #site-navigation .main-nav ul li.lang-item a,
+	body #masthead .main-navigation .main-nav ul li.lang-item a {
+		width: auto !important;
+		min-height: 42px !important;
+		padding: 12px 18px !important;
+		border-radius: 999px !important;
+		background: transparent !important;
+		color: var(--me-muted) !important;
+		text-decoration: none !important;
+	}
+
+	body #masthead #site-navigation .main-nav ul li.lang-item.current-lang a,
+	body #masthead .main-navigation .main-nav ul li.lang-item.current-lang a {
+		background: #edf1e6 !important;
+		color: var(--me-forest) !important;
+	}
+}
