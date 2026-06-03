@@ -104,7 +104,7 @@ $featured_query = new WP_Query(
 			</p>
 
 			<div class="me-home-hero__actions">
-				<a class="me-home-button me-home-button--primary" href="<?php echo esc_url( home_url( function_exists( 'pll_current_language' ) && 'en' === pll_current_language( 'slug' ) ? '/en/experiences/' : '/experiences/' ) ); ?>">
+				<a class="me-home-button me-home-button--primary" href="<?php echo esc_url( home_url( function_exists( 'pll_current_language' ) && 'en' === pll_current_language( 'slug' ) ? '/en/experiences/' : '/esperienze/' ) ); ?>">
 					<?php echo esc_html( me_translate( 'Explore experiences' ) ); ?>
 				</a>
 			</div>
@@ -293,7 +293,7 @@ $featured_query = new WP_Query(
 				<?php echo esc_html( me_translate( 'Usa i filtri per cercare attività in base a dislivello, difficoltà, esposizione, durata, lunghezza e materiale necessario.' ) ); ?>
 			</p>
 
-			<a class="me-home-button me-home-button--primary" href="<?php echo esc_url( home_url( function_exists( 'pll_current_language' ) && 'en' === pll_current_language( 'slug' ) ? '/en/experiences/' : '/experiences/' ) ); ?>">
+			<a class="me-home-button me-home-button--primary" href="<?php echo esc_url( home_url( function_exists( 'pll_current_language' ) && 'en' === pll_current_language( 'slug' ) ? '/en/experiences/' : '/esperienze/' ) ); ?>">
 				<?php echo esc_html( me_translate( 'Open experiences archive' ) ); ?>
 			</a>
 		</div>
