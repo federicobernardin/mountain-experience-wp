@@ -4497,12 +4497,14 @@ body.admin-bar {
 
 	body #masthead .inside-header {
 	position: relative !important;
+	width: 100% !important;
+	max-width: none !important;
 	min-height: 70px !important;
 	padding: 0 16px !important;
-	display: flex !important;
+	display: grid !important;
+	grid-template-columns: minmax(0, 1fr) 48px !important;
 	align-items: center !important;
-	justify-content: space-between !important;
-	gap: 10px !important;
+	column-gap: 10px !important;
 }
 
 body #masthead .site-branding,
@@ -4559,12 +4561,29 @@ body #masthead .main-title {
 		box-shadow: none !important;
 	}
 
-	body #mobile-menu-control-wrapper {
-		display: flex !important;
-		align-items: center !important;
-		justify-content: flex-end !important;
-		margin-left: auto !important;
-	}
+body #mobile-menu-control-wrapper {
+	position: static !important;
+	transform: none !important;
+	grid-column: 2 !important;
+	justify-self: end !important;
+	align-self: center !important;
+	display: flex !important;
+	align-items: center !important;
+	justify-content: center !important;
+	width: 48px !important;
+	height: 48px !important;
+	margin: 0 !important;
+	padding: 0 !important;
+	z-index: 10000 !important;
+}
+
+body #masthead .site-branding,
+body #masthead .site-branding-container {
+	grid-column: 1 !important;
+	min-width: 0 !important;
+	max-width: 100% !important;
+	overflow: hidden !important;
+}
 
 body #mobile-menu-control-wrapper .menu-toggle,
 body #masthead .menu-toggle {
@@ -4572,15 +4591,16 @@ body #masthead .menu-toggle {
 	height: 48px !important;
 	min-height: 48px !important;
 	flex: 0 0 48px !important;
-		padding: 0 !important;
-		border: 0 !important;
-		border-radius: 999px !important;
-		background: #edf1e6 !important;
-		color: var(--me-forest) !important;
-		font-size: 0 !important;
-		line-height: 1 !important;
-		box-shadow: none !important;
-	}
+	margin: 0 !important;
+	padding: 0 !important;
+	border: 0 !important;
+	border-radius: 999px !important;
+	background: #edf1e6 !important;
+	color: var(--me-forest) !important;
+	font-size: 0 !important;
+	line-height: 1 !important;
+	box-shadow: none !important;
+}
 
 	body #mobile-menu-control-wrapper .menu-toggle::before,
 	body #masthead .menu-toggle::before {
@@ -4727,4 +4747,62 @@ body #masthead .menu-toggle {
 		background: #edf1e6 !important;
 		color: var(--me-forest) !important;
 	}
+
+	body #masthead .inside-header {
+	width: 100% !important;
+	max-width: none !important;
+	padding: 0 16px !important;
+	display: flex !important;
+	align-items: center !important;
+	justify-content: flex-start !important;
+}
+
+body #masthead .site-branding,
+body #masthead .site-branding-container {
+	flex: 1 1 auto !important;
+	min-width: 0 !important;
+	max-width: calc(100% - 60px) !important;
+	overflow: hidden !important;
+}
+
+body #masthead #site-navigation,
+body #masthead .main-navigation {
+	flex: 0 0 48px !important;
+	width: 48px !important;
+	margin-left: auto !important;
+	margin-right: 0 !important;
+	display: flex !important;
+	align-items: center !important;
+	justify-content: flex-end !important;
+	position: static !important;
+}
+
+body #masthead #site-navigation .inside-navigation,
+body #masthead .main-navigation .inside-navigation {
+	width: 48px !important;
+	display: flex !important;
+	align-items: center !important;
+	justify-content: flex-end !important;
+	margin: 0 !important;
+	padding: 0 !important;
+}
+
+body #mobile-menu-control-wrapper {
+	width: 48px !important;
+	height: 48px !important;
+	margin: 0 !important;
+	padding: 0 !important;
+	display: flex !important;
+	align-items: center !important;
+	justify-content: flex-end !important;
+}
+
+body #mobile-menu-control-wrapper .menu-toggle,
+body #masthead .menu-toggle {
+	width: 48px !important;
+	height: 48px !important;
+	min-height: 48px !important;
+	margin: 0 !important;
+	padding: 0 !important;
+}
 }

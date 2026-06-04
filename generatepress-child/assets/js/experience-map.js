@@ -137,10 +137,10 @@
 			zoomControl: true
 		});
 
-		L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-			maxZoom: 19,
-			attribution: '&copy; OpenStreetMap contributors'
-		}).addTo(map);
+		L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
+	maxZoom: 17,
+	attribution: 'Map data: &copy; OpenStreetMap contributors, SRTM | Map style: &copy; OpenTopoMap'
+}).addTo(map);
 
 		fetch(gpxUrl)
 			.then((response) => {
