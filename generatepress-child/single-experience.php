@@ -266,6 +266,101 @@ $content_has_gallery     = ! empty( $gallery_shortcode );
 		</div>
 	</section>
 <?php endif; ?>
+<?php
+$related_experiences = function_exists( 'get_field' ) ? get_field( 'related_experiences', $post_id ) : array();
+
+if ( ! empty( $related_experiences ) ) :
+	?>
+	<section class="me-related-section" aria-label="<?php echo esc_attr( me_translate( 'Esperienze collegate' ) ); ?>">
+		<div class="me-related-section__inner">
+			<div class="me-related-section__header">
+				<p class="me-related-section__kicker">
+					<?php echo esc_html( me_translate( 'Related experiences' ) ); ?>
+				</p>
+
+				<h2 class="me-related-section__title">
+					<?php echo esc_html( me_translate( 'Esperienze collegate' ) ); ?>
+				</h2>
+
+				<p class="me-related-section__intro">
+					<?php echo esc_html( me_translate( 'Altri itinerari vicini o simili che potrebbero interessarti.' ) ); ?>
+				</p>
+			</div>
+
+			<div class="me-related-grid">
+				<?php foreach ( $related_experiences as $related_post ) : ?>
+					<?php
+					$related_id        = is_object( $related_post ) ? $related_post->ID : absint( $related_post );
+					$related_title     = get_the_title( $related_id );
+					$related_url       = get_permalink( $related_id );
+					$related_image_url = get_the_post_thumbnail_url( $related_id, 'large' );
+					$related_excerpt   = has_excerpt( $related_id ) ? get_the_excerpt( $related_id ) : wp_trim_words( wp_strip_all_tags( get_post_field( 'post_content', $related_id ) ), 22 );
+
+					$related_elevation = me_format_field_value( me_get_experience_field( 'elevation_gain', $related_id ), 'm' );
+					$related_duration  = me_format_duration( me_get_experience_field( 'duration', $related_id ) );
+					$related_length    = me_format_field_value( me_get_experience_field( 'length', $related_id ), 'km' );
+
+					$related_activity_terms = get_the_terms( $related_id, 'activity_type' );
+					$related_activity       = '';
+
+					if ( ! empty( $related_activity_terms ) && ! is_wp_error( $related_activity_terms ) ) {
+						$related_activity = $related_activity_terms[0]->name;
+					}
+					?>
+
+					<article class="me-related-card">
+						<a class="me-related-card__link" href="<?php echo esc_url( $related_url ); ?>">
+							<div class="me-related-card__media">
+								<?php if ( $related_image_url ) : ?>
+									<img src="<?php echo esc_url( $related_image_url ); ?>" alt="<?php echo esc_attr( $related_title ); ?>">
+								<?php endif; ?>
+
+								<?php if ( $related_activity ) : ?>
+									<span class="me-related-card__tag"><?php echo esc_html( $related_activity ); ?></span>
+								<?php endif; ?>
+
+								<div class="me-related-card__stats">
+									<?php if ( $related_elevation ) : ?>
+										<span>
+											<small><?php echo esc_html( me_translate( 'Dislivello' ) ); ?></small>
+											<strong><?php echo esc_html( $related_elevation ); ?></strong>
+										</span>
+									<?php endif; ?>
+
+									<?php if ( $related_duration ) : ?>
+										<span>
+											<small><?php echo esc_html( me_translate( 'Durata' ) ); ?></small>
+											<strong><?php echo esc_html( $related_duration ); ?></strong>
+										</span>
+									<?php endif; ?>
+
+									<?php if ( $related_length ) : ?>
+										<span>
+											<small><?php echo esc_html( me_translate( 'Lunghezza' ) ); ?></small>
+											<strong><?php echo esc_html( $related_length ); ?></strong>
+										</span>
+									<?php endif; ?>
+								</div>
+							</div>
+
+							<div class="me-related-card__body">
+								<h3><?php echo esc_html( $related_title ); ?></h3>
+
+								<?php if ( $related_excerpt ) : ?>
+									<p><?php echo esc_html( $related_excerpt ); ?></p>
+								<?php endif; ?>
+
+								<span class="me-related-card__cta">
+									<?php echo esc_html( me_translate( 'Leggi l’esperienza' ) ); ?>
+								</span>
+							</div>
+						</a>
+					</article>
+				<?php endforeach; ?>
+			</div>
+		</div>
+	</section>
+<?php endif; ?>
 	</main>
 
 	<?php
