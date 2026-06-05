@@ -492,3 +492,61 @@ function me_fix_gpx_filetype_check( $data, $file, $filename, $mimes, $real_mime 
 
 	return $data;
 }
+
+/**
+ * Localize FooGallery Image Viewer buttons.
+ */
+function me_localize_foogallery_image_viewer_buttons() {
+	if ( ! is_singular( 'experience' ) ) {
+		return;
+	}
+
+	$current_language = function_exists( 'pll_current_language' ) ? pll_current_language() : 'it';
+
+	$prev_label = 'it' === $current_language ? 'Indietro' : 'Prev';
+	$next_label = 'it' === $current_language ? 'Avanti' : 'Next';
+	?>
+	<script>
+		document.addEventListener('DOMContentLoaded', function () {
+			const prevLabel = <?php echo wp_json_encode( $prev_label ); ?>;
+			const nextLabel = <?php echo wp_json_encode( $next_label ); ?>;
+
+			function updateFooGalleryLabels() {
+				document.querySelectorAll('.foogallery-image-viewer .fiv-prev').forEach(function (button) {
+					if (button.getAttribute('data-me-localized') === '1') {
+						return;
+					}
+
+					button.setAttribute('title', prevLabel);
+					button.setAttribute('data-me-localized', '1');
+
+					const span = button.querySelector('span');
+					if (span) {
+						span.textContent = prevLabel;
+					}
+				});
+
+				document.querySelectorAll('.foogallery-image-viewer .fiv-next').forEach(function (button) {
+					if (button.getAttribute('data-me-localized') === '1') {
+						return;
+					}
+
+					button.setAttribute('title', nextLabel);
+					button.setAttribute('data-me-localized', '1');
+
+					const span = button.querySelector('span');
+					if (span) {
+						span.textContent = nextLabel;
+					}
+				});
+			}
+
+			updateFooGalleryLabels();
+
+			window.setTimeout(updateFooGalleryLabels, 500);
+			window.setTimeout(updateFooGalleryLabels, 1200);
+		});
+	</script>
+	<?php
+}
+add_action( 'wp_footer', 'me_localize_foogallery_image_viewer_buttons', 30 );

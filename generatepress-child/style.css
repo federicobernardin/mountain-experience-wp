@@ -3821,153 +3821,302 @@ body #masthead #site-navigation .main-nav ul li.lang-item a::after {
 }
 
 /* =========================================================
-   FOOGALLERY - Cleaner modern carousel
+   FOOGALLERY - Image Viewer modern styling
+   Target: .foogallery-image-viewer / .fiv-*
    ========================================================= */
 
-.single-experience .foogallery,
-.single-experience .fg-gallery,
-.single-experience .foogallery-container {
-	width: min(820px, 100%);
-	margin: clamp(56px, 7vw, 92px) auto !important;
-}
-
-/* Remove white card effect */
-.single-experience .foogallery .fg-item,
-.single-experience .foogallery .fg-item-inner,
-.single-experience .foogallery .fg-thumb,
-.single-experience .foogallery .fg-thumb-inner,
-.single-experience .foogallery .fg-image-wrap,
-.single-experience .foogallery .fg-image,
-.single-experience .foogallery .fg-loaded,
-.single-experience .foogallery .fg-panel,
-.single-experience .foogallery .fg-image-overlay,
-.single-experience .fg-gallery .fg-item,
-.single-experience .fg-gallery .fg-item-inner,
-.single-experience .fg-gallery .fg-thumb,
-.single-experience .fg-gallery .fg-thumb-inner,
-.single-experience .fg-gallery .fg-image-wrap {
+.single-experience .foogallery.foogallery-image-viewer,
+.single-experience .foogallery-container.foogallery-image-viewer,
+.single-experience .fg-image-viewer {
+	width: min(920px, 100%) !important;
+	margin: clamp(64px, 8vw, 104px) auto !important;
+	padding: 0 !important;
 	background: transparent !important;
 	border: 0 !important;
 	box-shadow: none !important;
-	padding: 0 !important;
+	outline: 0 !important;
 }
 
-/* Image look */
-.single-experience .foogallery img,
-.single-experience .fg-gallery img {
+/* Remove FooGallery default frame/shadow classes */
+.single-experience .foogallery-image-viewer.fg-border-thin,
+.single-experience .foogallery-image-viewer.fg-round-small,
+.single-experience .foogallery-image-viewer.fg-shadow-outline,
+.single-experience .foogallery-image-viewer.fg-shadow-inset-large {
+	border: 0 !important;
+	border-radius: 0 !important;
+	box-shadow: none !important;
+	background: transparent !important;
+}
+
+/* Main viewer wrapper */
+.single-experience .foogallery-image-viewer .fiv-inner {
+	width: 100% !important;
+	margin: 0 !important;
+	padding: 0 !important;
+	background: transparent !important;
+	border: 0 !important;
+	box-shadow: none !important;
+}
+
+/* Image area */
+.single-experience .foogallery-image-viewer .fiv-inner-container {
+	width: 100% !important;
+	margin: 0 !important;
+	padding: 0 !important;
+	background: transparent !important;
+	border: 0 !important;
+	box-shadow: none !important;
+	overflow: visible !important;
+}
+
+/* Item wrappers */
+.single-experience .foogallery-image-viewer .fg-item,
+.single-experience .foogallery-image-viewer .fg-item-inner,
+.single-experience .foogallery-image-viewer .fg-thumb,
+.single-experience .foogallery-image-viewer .fg-image-wrap,
+.single-experience .foogallery-image-viewer .fg-image-overlay {
+	margin: 0 !important;
+	padding: 0 !important;
+	background: transparent !important;
+	border: 0 !important;
+	box-shadow: none !important;
+	outline: 0 !important;
+}
+
+/* Main image */
+.single-experience .foogallery-image-viewer .fg-image-wrap img,
+.single-experience .foogallery-image-viewer img.fg-image {
 	display: block !important;
 	width: 100% !important;
 	height: auto !important;
+	max-width: 100% !important;
 	border: 0 !important;
-	border-radius: 24px !important;
-	box-shadow: 0 20px 48px rgba(24, 34, 29, 0.15) !important;
+	border-radius: 28px !important;
+	box-shadow: 0 24px 64px rgba(24, 34, 29, 0.18) !important;
 	object-fit: cover !important;
-	transition: transform 420ms ease, filter 420ms ease, box-shadow 420ms ease;
+	transition:
+		transform 420ms ease,
+		filter 420ms ease,
+		box-shadow 420ms ease;
 }
 
-/* Hover */
-.single-experience .foogallery a:hover img,
-.single-experience .fg-gallery a:hover img {
-	transform: scale(1.018);
-	filter: saturate(1.06) contrast(1.03);
-	box-shadow: 0 26px 64px rgba(24, 34, 29, 0.20) !important;
+.single-experience .foogallery-image-viewer .fg-thumb:hover img {
+	transform: scale(1.01);
+	filter: saturate(1.04) contrast(1.025);
+	box-shadow: 0 30px 78px rgba(24, 34, 29, 0.22) !important;
 }
 
-/* Carousel wrappers */
-.single-experience .foogallery .fg-carousel,
-.single-experience .foogallery .fg-carousel-inner,
-.single-experience .foogallery .fg-carousel-stage,
-.single-experience .foogallery .fg-carousel-stage-outer,
-.single-experience .fg-gallery .fg-carousel,
-.single-experience .fg-gallery .fg-carousel-inner,
-.single-experience .fg-gallery .fg-carousel-stage,
-.single-experience .fg-gallery .fg-carousel-stage-outer {
+/* Controls row */
+.single-experience .foogallery-image-viewer .fiv-ctrls {
+	display: grid !important;
+	grid-template-columns: 1fr auto 1fr !important;
+	align-items: center !important;
+	gap: 18px !important;
+	width: 100% !important;
+	margin: 22px 0 0 !important;
+	padding: 0 !important;
 	background: transparent !important;
 	border: 0 !important;
 	box-shadow: none !important;
 }
 
-/* Arrows */
-.single-experience .foogallery .fg-prev,
-.single-experience .foogallery .fg-next,
-.single-experience .fg-gallery .fg-prev,
-.single-experience .fg-gallery .fg-next {
-	width: 46px !important;
-	height: 46px !important;
-	display: inline-flex !important;
-	align-items: center !important;
-	justify-content: center !important;
+/* Prev / Next */
+.single-experience .foogallery-image-viewer .fiv-prev,
+.single-experience .foogallery-image-viewer .fiv-next {
+	min-width: 0 !important;
+	width: auto !important;
+	min-height: 44px !important;
+	margin: 0 !important;
+	padding: 0 22px !important;
+	border: 1px solid rgba(222, 216, 204, 0.95) !important;
 	border-radius: 999px !important;
-	background: rgba(255, 255, 255, 0.78) !important;
+	background: #ffffff !important;
 	color: var(--me-forest) !important;
-	box-shadow: 0 12px 30px rgba(24, 34, 29, 0.12) !important;
-	backdrop-filter: blur(10px);
-	-webkit-backdrop-filter: blur(10px);
-	opacity: 0.86 !important;
+	box-shadow: 0 10px 24px rgba(24, 34, 29, 0.08) !important;
+	font-size: 0.82rem !important;
+	font-weight: 850 !important;
+	line-height: 1 !important;
+	text-transform: uppercase !important;
+	letter-spacing: 0.06em !important;
+	cursor: pointer !important;
 	transition:
 		background 180ms ease,
 		color 180ms ease,
-		opacity 180ms ease,
+		border-color 180ms ease,
 		transform 180ms ease;
 }
 
-.single-experience .foogallery .fg-prev:hover,
-.single-experience .foogallery .fg-next:hover,
-.single-experience .fg-gallery .fg-prev:hover,
-.single-experience .fg-gallery .fg-next:hover {
+.single-experience .foogallery-image-viewer .fiv-prev {
+	justify-self: start !important;
+}
+
+.single-experience .foogallery-image-viewer .fiv-next {
+	justify-self: end !important;
+}
+
+.single-experience .foogallery-image-viewer .fiv-prev:hover,
+.single-experience .foogallery-image-viewer .fiv-next:hover {
 	background: var(--me-forest) !important;
 	color: #ffffff !important;
-	opacity: 1 !important;
+	border-color: var(--me-forest) !important;
 	transform: translateY(-1px);
 }
 
-/* Dots */
-.single-experience .foogallery .fg-paging-container,
-.single-experience .fg-gallery .fg-paging-container {
-	margin-top: 26px !important;
-	display: flex !important;
-	align-items: center !important;
-	justify-content: center !important;
-	gap: 8px !important;
+/* Button text */
+.single-experience .foogallery-image-viewer .fiv-prev span,
+.single-experience .foogallery-image-viewer .fiv-next span {
+	display: inline-block !important;
+	color: inherit !important;
+	font: inherit !important;
 }
 
-.single-experience .foogallery .fg-dot,
-.single-experience .fg-gallery .fg-dot {
-	width: 9px !important;
-	height: 9px !important;
+/* Counter */
+.single-experience .foogallery-image-viewer .fiv-count {
+	justify-self: center !important;
 	margin: 0 !important;
-	border-radius: 999px !important;
-	background: rgba(24, 34, 29, 0.24) !important;
-	opacity: 1 !important;
-	transition: width 180ms ease, background 180ms ease;
+	color: var(--me-muted) !important;
+	font-size: 0.92rem !important;
+	font-weight: 750 !important;
+	line-height: 1 !important;
+	text-align: center !important;
 }
 
-.single-experience .foogallery .fg-dot.active,
-.single-experience .fg-gallery .fg-dot.active {
-	width: 22px !important;
-	background: var(--me-forest) !important;
+.single-experience .foogallery-image-viewer .fiv-count-current,
+.single-experience .foogallery-image-viewer .fiv-count-total {
+	color: var(--me-forest) !important;
+	font-weight: 850 !important;
+}
+
+.single-experience .foogallery-image-viewer .fiv-count-current {
+	margin-right: 4px !important;
+}
+
+.single-experience .foogallery-image-viewer .fiv-count-total {
+	margin-left: 4px !important;
 }
 
 /* Mobile */
 @media (max-width: 760px) {
-	.single-experience .foogallery,
-	.single-experience .fg-gallery,
-	.single-experience .foogallery-container {
-		width: 100%;
-		margin: 44px auto 64px !important;
+	.single-experience .foogallery.foogallery-image-viewer,
+	.single-experience .foogallery-container.foogallery-image-viewer,
+	.single-experience .fg-image-viewer {
+		width: 100% !important;
+		margin: 44px auto 68px !important;
 	}
 
-	.single-experience .foogallery img,
-	.single-experience .fg-gallery img {
-		border-radius: 18px !important;
+	.single-experience .foogallery-image-viewer .fg-image-wrap img,
+	.single-experience .foogallery-image-viewer img.fg-image {
+		border-radius: 20px !important;
+		box-shadow: 0 18px 44px rgba(24, 34, 29, 0.16) !important;
 	}
 
-	.single-experience .foogallery .fg-prev,
-	.single-experience .foogallery .fg-next,
-	.single-experience .fg-gallery .fg-prev,
-	.single-experience .fg-gallery .fg-next {
-		width: 40px !important;
-		height: 40px !important;
+	.single-experience .foogallery-image-viewer .fiv-ctrls {
+		grid-template-columns: auto 1fr auto !important;
+		gap: 10px !important;
+		margin-top: 18px !important;
+	}
+
+	.single-experience .foogallery-image-viewer .fiv-prev,
+	.single-experience .foogallery-image-viewer .fiv-next {
+		min-height: 40px !important;
+		padding: 0 14px !important;
+		font-size: 0.72rem !important;
+	}
+
+	.single-experience .foogallery-image-viewer .fiv-count {
+		font-size: 0.78rem !important;
+	}
+}
+
+/* =========================================================
+   FOOGALLERY - final image viewer refinements
+   ========================================================= */
+
+/* Remove residual grey border/frame around rounded image */
+.single-experience .foogallery-image-viewer .fiv-inner-container,
+.single-experience .foogallery-image-viewer .fg-item,
+.single-experience .foogallery-image-viewer .fg-item-inner,
+.single-experience .foogallery-image-viewer .fg-thumb,
+.single-experience .foogallery-image-viewer .fg-image-wrap {
+	display: block !important;
+	background: transparent !important;
+	border: 0 !important;
+	box-shadow: none !important;
+	outline: 0 !important;
+	border-radius: 28px !important;
+	overflow: hidden !important;
+}
+
+.single-experience .foogallery-image-viewer .fg-item-inner::before,
+.single-experience .foogallery-image-viewer .fg-item-inner::after,
+.single-experience .foogallery-image-viewer .fg-thumb::before,
+.single-experience .foogallery-image-viewer .fg-thumb::after,
+.single-experience .foogallery-image-viewer .fg-image-wrap::before,
+.single-experience .foogallery-image-viewer .fg-image-wrap::after {
+	display: none !important;
+	content: none !important;
+	border: 0 !important;
+	box-shadow: none !important;
+	background: transparent !important;
+}
+
+.single-experience .foogallery-image-viewer .fg-image-wrap img,
+.single-experience .foogallery-image-viewer img.fg-image {
+	display: block !important;
+	width: 100% !important;
+	height: auto !important;
+	margin: 0 !important;
+	border: 0 !important;
+	outline: 0 !important;
+	border-radius: 28px !important;
+	box-shadow: 0 24px 64px rgba(24, 34, 29, 0.18) !important;
+}
+
+/* Align Prev / Next text perfectly inside buttons */
+.single-experience .foogallery-image-viewer .fiv-prev,
+.single-experience .foogallery-image-viewer .fiv-next {
+	display: inline-flex !important;
+	align-items: center !important;
+	justify-content: center !important;
+	text-align: center !important;
+	line-height: 1 !important;
+	vertical-align: middle !important;
+}
+
+.single-experience .foogallery-image-viewer .fiv-prev span,
+.single-experience .foogallery-image-viewer .fiv-next span {
+	display: inline-flex !important;
+	align-items: center !important;
+	justify-content: center !important;
+	width: 100% !important;
+	height: 100% !important;
+	margin: 0 !important;
+	padding: 0 !important;
+	line-height: 1 !important;
+	text-align: center !important;
+}
+
+/* Optional: make the two buttons visually consistent */
+.single-experience .foogallery-image-viewer .fiv-prev,
+.single-experience .foogallery-image-viewer .fiv-next {
+	min-width: 86px !important;
+}
+
+/* Mobile radius */
+@media (max-width: 760px) {
+	.single-experience .foogallery-image-viewer .fiv-inner-container,
+	.single-experience .foogallery-image-viewer .fg-item,
+	.single-experience .foogallery-image-viewer .fg-item-inner,
+	.single-experience .foogallery-image-viewer .fg-thumb,
+	.single-experience .foogallery-image-viewer .fg-image-wrap,
+	.single-experience .foogallery-image-viewer .fg-image-wrap img,
+	.single-experience .foogallery-image-viewer img.fg-image {
+		border-radius: 20px !important;
+	}
+
+	.single-experience .foogallery-image-viewer .fiv-prev,
+	.single-experience .foogallery-image-viewer .fiv-next {
+		min-width: 72px !important;
 	}
 }
 
