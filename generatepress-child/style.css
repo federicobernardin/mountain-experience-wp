@@ -4806,3 +4806,302 @@ body #masthead .menu-toggle {
 	padding: 0 !important;
 }
 }
+
+/* =========================================================
+   MOBILE HEADER MENU - final right alignment override
+   ========================================================= */
+
+@media (max-width: 768px) {
+	body #masthead .inside-header {
+		width: 100% !important;
+		max-width: none !important;
+		display: grid !important;
+		grid-template-columns: minmax(0, 1fr) 48px !important;
+		align-items: center !important;
+		column-gap: 10px !important;
+		padding-left: 16px !important;
+		padding-right: 16px !important;
+	}
+
+	body #masthead .site-branding,
+	body #masthead .site-branding-container {
+		grid-column: 1 !important;
+		grid-row: 1 !important;
+		min-width: 0 !important;
+		max-width: 100% !important;
+		overflow: hidden !important;
+		justify-self: start !important;
+	}
+
+	body #masthead #site-navigation,
+	body #masthead .main-navigation {
+		grid-column: 2 !important;
+		grid-row: 1 !important;
+		justify-self: end !important;
+		align-self: center !important;
+		width: 48px !important;
+		min-width: 48px !important;
+		max-width: 48px !important;
+		margin: 0 !important;
+		padding: 0 !important;
+		display: flex !important;
+		align-items: center !important;
+		justify-content: flex-end !important;
+		position: static !important;
+		background: transparent !important;
+		border: 0 !important;
+		box-shadow: none !important;
+		overflow: visible !important;
+	}
+
+	body #masthead #site-navigation .inside-navigation,
+	body #masthead .main-navigation .inside-navigation {
+		width: 48px !important;
+		min-width: 48px !important;
+		max-width: 48px !important;
+		margin: 0 !important;
+		padding: 0 !important;
+		display: flex !important;
+		align-items: center !important;
+		justify-content: flex-end !important;
+		background: transparent !important;
+		border: 0 !important;
+		box-shadow: none !important;
+	}
+
+	body #mobile-menu-control-wrapper {
+		width: 48px !important;
+		min-width: 48px !important;
+		max-width: 48px !important;
+		height: 48px !important;
+		margin: 0 !important;
+		padding: 0 !important;
+		display: flex !important;
+		align-items: center !important;
+		justify-content: flex-end !important;
+		position: static !important;
+		transform: none !important;
+	}
+
+	body #mobile-menu-control-wrapper .menu-toggle,
+	body #masthead .menu-toggle {
+		width: 48px !important;
+		height: 48px !important;
+		min-height: 48px !important;
+		margin: 0 !important;
+		padding: 0 !important;
+	}
+}
+
+/* =========================================================
+   MOBILE HEADER - hide site title
+   ========================================================= */
+
+@media (max-width: 768px) {
+	body #masthead .site-branding {
+		display: none !important;
+	}
+
+	body #masthead .site-logo,
+	body #masthead .site-logo a {
+		display: flex !important;
+		align-items: center !important;
+	}
+
+	body #masthead .inside-header {
+		display: flex !important;
+		align-items: center !important;
+		justify-content: space-between !important;
+		width: 100% !important;
+		max-width: none !important;
+		padding: 0 16px !important;
+	}
+
+	body #masthead #site-navigation,
+	body #masthead .main-navigation {
+		margin-left: auto !important;
+	}
+}
+
+/* =========================================================
+   MOBILE HEADER - hamburger aligned right
+   ========================================================= */
+
+@media (max-width: 768px) {
+	body #masthead {
+		position: sticky !important;
+		top: 0 !important;
+		z-index: 9999 !important;
+		background: #ffffff !important;
+	}
+
+	body.admin-bar #masthead {
+		top: 46px !important;
+	}
+
+	body #masthead .inside-header {
+		position: relative !important;
+		width: 100% !important;
+		max-width: none !important;
+		min-height: 72px !important;
+		padding: 0 76px 0 16px !important;
+		display: flex !important;
+		align-items: center !important;
+		justify-content: flex-start !important;
+	}
+
+	body #masthead .main-title,
+	body #masthead .site-description {
+		display: none !important;
+	}
+
+	body #masthead .site-logo,
+	body #masthead .site-logo a {
+		display: flex !important;
+		align-items: center !important;
+		margin: 0 !important;
+	}
+
+	body #masthead .site-logo img,
+	body #masthead .header-image {
+		max-height: 48px !important;
+		width: auto !important;
+	}
+
+	body #masthead #site-navigation,
+	body #masthead .main-navigation {
+		position: static !important;
+		margin-left: auto !important;
+		background: transparent !important;
+		border: 0 !important;
+		box-shadow: none !important;
+	}
+
+	body #masthead .inside-navigation {
+		position: static !important;
+		background: transparent !important;
+		border: 0 !important;
+		box-shadow: none !important;
+	}
+
+	body #masthead .menu-toggle {
+		position: absolute !important;
+		top: 50% !important;
+		right: 16px !important;
+		transform: translateY(-50%) !important;
+		width: 48px !important;
+		height: 48px !important;
+		min-height: 48px !important;
+		margin: 0 !important;
+		padding: 0 !important;
+		border: 0 !important;
+		border-radius: 999px !important;
+		background: #edf1e6 !important;
+		color: var(--me-forest) !important;
+		font-size: 0 !important;
+		line-height: 1 !important;
+		box-shadow: none !important;
+		z-index: 10002 !important;
+	}
+
+	body #masthead .menu-toggle::before {
+		content: "☰" !important;
+		display: inline-flex !important;
+		align-items: center !important;
+		justify-content: center !important;
+		width: 48px !important;
+		height: 48px !important;
+		font-size: 1.35rem !important;
+		font-weight: 700 !important;
+		line-height: 1 !important;
+		color: var(--me-forest) !important;
+	}
+
+	body #masthead #site-navigation:not(.toggled) .main-nav,
+	body #masthead .main-navigation:not(.toggled) .main-nav {
+		display: none !important;
+	}
+
+	body #masthead #site-navigation.toggled .main-nav,
+	body #masthead .main-navigation.toggled .main-nav,
+	body #masthead #site-navigation.has-inline-mobile-toggle.toggled .main-nav {
+		position: absolute !important;
+		top: calc(100% + 10px) !important;
+		left: 18px !important;
+		right: 18px !important;
+		z-index: 9998 !important;
+		display: block !important;
+		width: auto !important;
+		margin: 0 !important;
+		padding: 14px !important;
+		border: 1px solid rgba(222, 216, 204, 0.95) !important;
+		border-radius: 24px !important;
+		background: #ffffff !important;
+		box-shadow: 0 22px 58px rgba(24, 34, 29, 0.18) !important;
+	}
+
+	body #masthead #site-navigation .main-nav > ul,
+	body #masthead .main-navigation .main-nav > ul {
+		width: 100% !important;
+		display: block !important;
+		margin: 0 !important;
+		padding: 0 !important;
+		background: transparent !important;
+		border: 0 !important;
+		box-shadow: none !important;
+	}
+
+	body #masthead #site-navigation .main-nav ul li,
+	body #masthead .main-navigation .main-nav ul li {
+		width: 100% !important;
+		display: block !important;
+		margin: 0 !important;
+		padding: 0 !important;
+		border: 0 !important;
+		background: transparent !important;
+	}
+
+	body #masthead #site-navigation .main-nav ul li a,
+	body #masthead .main-navigation .main-nav ul li a {
+		width: 100% !important;
+		min-height: 48px !important;
+		display: flex !important;
+		align-items: center !important;
+		justify-content: center !important;
+		margin: 0 !important;
+		padding: 14px 16px !important;
+		border: 0 !important;
+		border-radius: 14px !important;
+		background: transparent !important;
+		color: var(--me-ink) !important;
+		font-size: 0.88rem !important;
+		font-weight: 850 !important;
+		line-height: 1.1 !important;
+		text-align: center !important;
+		text-transform: uppercase !important;
+		letter-spacing: 0.08em !important;
+		text-decoration: none !important;
+		box-shadow: none !important;
+	}
+
+	body #masthead #site-navigation .main-nav ul li.lang-item,
+	body #masthead .main-navigation .main-nav ul li.lang-item {
+		width: auto !important;
+		display: inline-flex !important;
+		margin: 10px 4px 0 !important;
+	}
+
+	body #masthead #site-navigation .main-nav ul li.lang-item a,
+	body #masthead .main-navigation .main-nav ul li.lang-item a {
+		width: auto !important;
+		min-height: 42px !important;
+		padding: 12px 18px !important;
+		border-radius: 999px !important;
+	}
+
+	body #masthead #site-navigation .main-nav ul li.lang-item.current-lang a,
+	body #masthead .main-navigation .main-nav ul li.lang-item.current-lang a {
+		background: #edf1e6 !important;
+		color: var(--me-forest) !important;
+	}
+}
