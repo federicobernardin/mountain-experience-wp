@@ -5310,3 +5310,53 @@ body #masthead .menu-toggle {
 		width: min(100% - 32px, 1180px);
 	}
 }
+
+/* =========================================================
+   SINGLE EXPERIENCE - final spacing refinements
+   ========================================================= */
+
+/* Remove small white background behind FooGallery counter */
+.single-experience .foogallery-image-viewer .fiv-count,
+.single-experience .foogallery-image-viewer .fiv-count span {
+	background: transparent !important;
+	box-shadow: none !important;
+	border: 0 !important;
+	padding: 0 !important;
+}
+
+/* Reduce vertical rhythm between route map and gallery */
+.me-route-section {
+	padding-top: clamp(56px, 7vw, 88px) !important;
+	padding-bottom: clamp(48px, 6vw, 72px) !important;
+}
+
+.me-gallery-section {
+	padding-top: clamp(48px, 6vw, 72px) !important;
+	padding-bottom: clamp(64px, 8vw, 96px) !important;
+}
+
+/* Slightly reduce gallery internal top margin */
+.me-gallery-section .foogallery,
+.me-gallery-section .fg-gallery,
+.me-gallery-section .foogallery-container {
+	margin-top: clamp(28px, 4vw, 44px) !important;
+}
+
+/* Keep mobile compact */
+@media (max-width: 760px) {
+	.me-route-section {
+		padding-top: 48px !important;
+		padding-bottom: 42px !important;
+	}
+
+	.me-gallery-section {
+		padding-top: 42px !important;
+		padding-bottom: 64px !important;
+	}
+
+	.me-gallery-section .foogallery,
+	.me-gallery-section .fg-gallery,
+	.me-gallery-section .foogallery-container {
+		margin-top: 28px !important;
+	}
+}
