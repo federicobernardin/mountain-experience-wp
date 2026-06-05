@@ -5360,3 +5360,20 @@ body #masthead .menu-toggle {
 		margin-top: 28px !important;
 	}
 }
+
+/* =========================================================
+   SINGLE EXPERIENCE - clean section backgrounds
+   ========================================================= */
+
+.me-route-section,
+.me-gallery-section {
+	background: var(--me-paper) !important;
+}
+
+.me-route-map {
+	box-shadow: 0 16px 38px rgba(24, 34, 29, 0.09) !important;
+}
+
+.me-gallery-section {
+	margin-top: 0 !important;
+}
