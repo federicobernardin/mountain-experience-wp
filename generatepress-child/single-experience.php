@@ -20,8 +20,18 @@ while ( have_posts() ) :
 	$gpx_url          = me_get_file_url( me_get_experience_field( 'gpx_file', $post_id ) );
 	$difficulty       = '';
 	$difficulty_terms = get_the_terms( $post_id, 'difficulty' );
-	$content          = get_the_content();
-	$content_has_gallery = has_shortcode( $content, 'foogallery' ) || has_shortcode( $content, 'gallery' );
+	$content_raw = get_the_content();
+
+$gallery_shortcode = '';
+
+if ( preg_match( '/\[foogallery[^\]]*\]/', $content_raw, $matches ) ) {
+	$gallery_shortcode = $matches[0];
+} elseif ( preg_match( '/\[gallery[^\]]*\]/', $content_raw, $matches ) ) {
+	$gallery_shortcode = $matches[0];
+}
+
+$content_without_gallery = $gallery_shortcode ? str_replace( $gallery_shortcode, '', $content_raw ) : $content_raw;
+$content_has_gallery     = ! empty( $gallery_shortcode );
 
 	if ( ! empty( $difficulty_terms ) && ! is_wp_error( $difficulty_terms ) ) {
 		$difficulty_term = reset( $difficulty_terms );
@@ -136,12 +146,8 @@ while ( have_posts() ) :
 
 		<div id="description" class="me-experience__layout">
 			<article class="me-experience__content">
-				<?php if ( $content_has_gallery ) : ?>
-					<div id="experience-gallery" class="me-gallery-anchor" aria-hidden="true"></div>
-				<?php endif; ?>
-
-				<?php the_content(); ?>
-			</article>
+	<?php echo apply_filters( 'the_content', $content_without_gallery ); ?>
+</article>
 
 			<aside class="me-experience__meta" aria-label="<?php echo esc_attr( me_translate( 'Experience technical data' ) ); ?>">
 				<section class="me-panel">
@@ -243,6 +249,23 @@ while ( have_posts() ) :
 				</div>
 			</section>
 		<?php endif; ?>
+		<?php if ( $content_has_gallery ) : ?>
+	<section id="experience-gallery" class="me-gallery-section" aria-label="<?php echo esc_attr( me_translate( 'Gallery' ) ); ?>">
+		<div class="me-gallery-section__inner">
+			<div class="me-gallery-section__header">
+				<p class="me-gallery-section__kicker">
+					<?php echo esc_html( me_translate( 'Gallery' ) ); ?>
+				</p>
+
+				<h2 class="me-gallery-section__title">
+					<?php echo esc_html( me_translate( 'Gallery fotografica' ) ); ?>
+				</h2>
+			</div>
+
+			<?php echo do_shortcode( $gallery_shortcode ); ?>
+		</div>
+	</section>
+<?php endif; ?>
 	</main>
 
 	<?php
