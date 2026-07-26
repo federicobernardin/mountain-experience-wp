@@ -5506,3 +5506,28 @@ body #masthead .menu-toggle {
 	color: #ffffff;
 	outline: none;
 }
+
+/* =========================================================
+   RELATED EXPERIENCES - mobile single column fix
+   ========================================================= */
+
+@media (max-width: 980px) {
+	.single-experience .me-related-grid {
+		grid-template-columns: 1fr !important;
+		gap: 26px !important;
+	}
+
+	.single-experience .me-related-card {
+		max-width: none !important;
+		width: 100% !important;
+	}
+
+	.single-experience .me-related-card__media,
+	.single-experience .me-related-card__media img {
+		height: 230px !important;
+	}
+
+	.single-experience .me-related-card__body {
+		min-height: auto !important;
+	}
+}
