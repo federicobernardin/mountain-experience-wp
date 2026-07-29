@@ -86,13 +86,13 @@ while ( have_posts() ) :
 
 	$support_points = function_exists( 'get_field' ) ? get_field( 'support_points', $post_id ) : array();
 
-if ( empty( $support_points ) || ! is_array( $support_points ) ) {
-	$support_points = array();
-}
+	if ( empty( $support_points ) || ! is_array( $support_points ) ) {
+		$support_points = array();
+	}
 	?>
 
 	<main id="primary" <?php post_class( 'me-experience' ); ?>>
-	   	<section class="me-experience__hero" aria-label="<?php echo esc_attr( me_translate( 'Experience overview' ) ); ?>">
+		<section class="me-experience__hero" aria-label="<?php echo esc_attr( me_translate( 'Experience overview' ) ); ?>">
 			<?php if ( $hero_image_url ) : ?>
 				<div
 					class="me-experience__hero-image"
@@ -216,81 +216,108 @@ if ( empty( $support_points ) || ! is_array( $support_points ) ) {
 					</div>
 				</section>
 
-			<?php if ( ! empty( $support_points ) ) : ?>
-	<section class="me-panel">
-		<header class="me-panel__header">
-			<h2 class="me-panel__title"><?php echo esc_html( me_translate( 'Punti di appoggio' ) ); ?></h2>
-		</header>
+				<?php if ( ! empty( $support_points ) ) : ?>
+					<section class="me-panel me-support-points-panel">
+						<header class="me-panel__header">
+							<h2 class="me-panel__title"><?php echo esc_html( me_translate( 'Punti di appoggio' ) ); ?></h2>
+						</header>
 
-		<div class="me-taxonomy-list">
-			<?php foreach ( $support_points as $support_point ) : ?>
-				<?php
-				$support_point_id = $support_point instanceof WP_Post ? $support_point->ID : absint( $support_point );
+						<div class="me-support-points-list">
+							<?php foreach ( $support_points as $support_point ) : ?>
+								<?php
+								$support_point_id = 0;
 
-				if ( ! $support_point_id ) {
-					continue;
-				}
+								if ( $support_point instanceof WP_Post ) {
+									$support_point_id = $support_point->ID;
+								} elseif ( is_numeric( $support_point ) ) {
+									$support_point_id = absint( $support_point );
+								}
 
-				$support_point_title    = get_the_title( $support_point_id );
-				$support_point_type     = function_exists( 'get_field' ) ? get_field( 'support_point_type', $support_point_id ) : '';
-				$support_point_altitude = function_exists( 'get_field' ) ? get_field( 'support_point_altitude', $support_point_id ) : '';
-				$support_point_location = function_exists( 'get_field' ) ? get_field( 'support_point_location', $support_point_id ) : '';
-				$support_point_url      = function_exists( 'get_field' ) ? get_field( 'support_point_external_url', $support_point_id ) : '';
+								if ( ! $support_point_id ) {
+									continue;
+								}
 
-				if ( ! $support_point_title ) {
-					continue;
-				}
+								$support_point_title    = get_the_title( $support_point_id );
+								$support_point_type     = function_exists( 'get_field' ) ? get_field( 'support_point_type', $support_point_id ) : '';
+								$support_point_altitude = function_exists( 'get_field' ) ? get_field( 'support_point_altitude', $support_point_id ) : '';
+								$support_point_location = function_exists( 'get_field' ) ? get_field( 'support_point_location', $support_point_id ) : '';
 
-				if ( is_array( $support_point_type ) && isset( $support_point_type['value'] ) ) {
-					$support_point_type = $support_point_type['value'];
-				}
+								$support_point_url_raw = function_exists( 'get_field' ) ? get_field( 'support_point_external_url', $support_point_id ) : '';
+								$support_point_url     = '';
 
-				$support_point_type_label = '';
+								if ( is_array( $support_point_url_raw ) && ! empty( $support_point_url_raw['url'] ) ) {
+									$support_point_url = $support_point_url_raw['url'];
+								} elseif ( is_string( $support_point_url_raw ) ) {
+									$support_point_url = $support_point_url_raw;
+								}
 
-				if ( 'rifugio' === $support_point_type ) {
-					$support_point_type_label = me_translate( 'Rifugio' );
-				} elseif ( 'bivacco' === $support_point_type ) {
-					$support_point_type_label = me_translate( 'Bivacco' );
-				} elseif ( 'malga' === $support_point_type ) {
-					$support_point_type_label = me_translate( 'Malga' );
-				} elseif ( 'ristoro' === $support_point_type ) {
-					$support_point_type_label = me_translate( 'Punto di ristoro' );
-				} elseif ( 'altro' === $support_point_type ) {
-					$support_point_type_label = me_translate( 'Altro' );
-				}
-				?>
+								if ( ! $support_point_title ) {
+									continue;
+								}
 
-				<span class="me-taxonomy-pill">
-					<?php echo esc_html( $support_point_title ); ?>
-				</span>
+								if ( is_array( $support_point_type ) && isset( $support_point_type['value'] ) ) {
+									$support_point_type = $support_point_type['value'];
+								}
 
-				<?php if ( $support_point_type_label ) : ?>
-					<span class="me-taxonomy-pill">
-						<?php echo esc_html( $support_point_type_label ); ?>
-					</span>
+								$support_point_type_label = '';
+
+								if ( 'rifugio' === $support_point_type ) {
+									$support_point_type_label = me_translate( 'Rifugio' );
+								} elseif ( 'bivacco' === $support_point_type ) {
+									$support_point_type_label = me_translate( 'Bivacco' );
+								} elseif ( 'malga' === $support_point_type ) {
+									$support_point_type_label = me_translate( 'Malga' );
+								} elseif ( 'ristoro' === $support_point_type ) {
+									$support_point_type_label = me_translate( 'Punto di ristoro' );
+								} elseif ( 'altro' === $support_point_type ) {
+									$support_point_type_label = me_translate( 'Altro' );
+								}
+								?>
+
+								<article class="me-support-point-card">
+									<h3 class="me-support-point-card__title">
+										<?php echo esc_html( $support_point_title ); ?>
+									</h3>
+
+									<?php if ( $support_point_type_label || $support_point_altitude || $support_point_location ) : ?>
+										<div class="me-support-point-card__meta">
+											<?php if ( $support_point_type_label ) : ?>
+												<span class="me-support-point-card__tag">
+													<?php echo esc_html( $support_point_type_label ); ?>
+												</span>
+											<?php endif; ?>
+
+											<?php if ( $support_point_altitude ) : ?>
+												<span class="me-support-point-card__tag">
+													<?php echo esc_html( me_format_field_value( $support_point_altitude, 'm' ) ); ?>
+												</span>
+											<?php endif; ?>
+
+											<?php if ( $support_point_location ) : ?>
+												<span class="me-support-point-card__location">
+													<?php echo esc_html( $support_point_location ); ?>
+												</span>
+											<?php endif; ?>
+										</div>
+									<?php endif; ?>
+
+									<?php if ( $support_point_url ) : ?>
+										<div class="me-support-point-card__actions">
+											<a
+												class="me-support-point-card__button"
+												href="<?php echo esc_url( $support_point_url ); ?>"
+												target="_blank"
+												rel="noopener noreferrer"
+											>
+												<?php echo esc_html( me_translate( 'Vai al sito' ) ); ?> ↗
+											</a>
+										</div>
+									<?php endif; ?>
+								</article>
+							<?php endforeach; ?>
+						</div>
+					</section>
 				<?php endif; ?>
-
-				<?php if ( $support_point_altitude ) : ?>
-					<span class="me-taxonomy-pill">
-						<?php echo esc_html( me_format_field_value( $support_point_altitude, 'm' ) ); ?>
-					</span>
-				<?php endif; ?>
-
-				<?php if ( $support_point_location ) : ?>
-					<span class="me-taxonomy-pill">
-						<?php echo esc_html( $support_point_location ); ?>
-					</span>
-				<?php endif; ?>
-
-				<?php if ( $support_point_url ) : ?>
-					<span class="me-taxonomy-pill">
-						<?php echo esc_html( me_translate( 'Sito esterno disponibile' ) ); ?>
-					</span>
-				<?php endif; ?>
-			<?php endforeach; ?>
-		</div>
-	</section>
-<?php endif; ?>
 			</aside>
 		</div>
 

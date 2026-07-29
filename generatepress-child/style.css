@@ -5496,3 +5496,108 @@ body #masthead .menu-toggle {
 		min-height: auto !important;
 	}
 }
+
+/* =========================================================
+   SINGLE EXPERIENCE - support points cards
+   ========================================================= */
+
+.single-experience .me-support-points-list {
+	display: flex;
+	flex-direction: column;
+	gap: 14px;
+	padding: 10px 22px 22px;
+}
+
+.single-experience .me-support-point-card {
+	display: block;
+	min-width: 0;
+	padding: 15px 15px 14px;
+	border: 1px solid rgba(222, 216, 204, 0.9);
+	border-radius: 16px;
+	background: #fbfaf6;
+	box-shadow: 0 6px 18px rgba(24, 34, 29, 0.04);
+}
+
+.single-experience .me-support-point-card__title {
+	margin: 0;
+	color: var(--me-ink);
+	font-size: 0.95rem;
+	font-weight: 850;
+	line-height: 1.2;
+	letter-spacing: -0.015em;
+	overflow-wrap: anywhere;
+}
+
+.single-experience .me-support-point-card__meta {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+	align-items: center;
+	margin-top: 10px;
+	min-width: 0;
+}
+
+.single-experience .me-support-point-card__tag {
+	display: inline-flex;
+	align-items: center;
+	min-height: 28px;
+	padding: 6px 10px;
+	border-radius: 999px;
+	background: #edf1e6;
+	color: var(--me-forest);
+	font-size: 0.68rem;
+	font-weight: 850;
+	line-height: 1;
+	text-transform: uppercase;
+	letter-spacing: 0.06em;
+}
+
+.single-experience .me-support-point-card__location {
+	display: block;
+	min-width: 0;
+	color: var(--me-muted);
+	font-size: 0.78rem;
+	font-weight: 650;
+	line-height: 1.35;
+	overflow-wrap: anywhere;
+}
+
+.single-experience .me-support-point-card__actions {
+	margin-top: 13px;
+}
+
+.single-experience .me-support-point-card__button {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	min-height: 38px;
+	padding: 10px 14px;
+	border-radius: 999px;
+	background: var(--me-forest);
+	color: #ffffff !important;
+	font-size: 0.72rem;
+	font-weight: 850;
+	line-height: 1;
+	text-transform: uppercase;
+	letter-spacing: 0.06em;
+	text-decoration: none !important;
+	box-sizing: border-box;
+}
+
+.single-experience .me-support-point-card__button:hover,
+.single-experience .me-support-point-card__button:focus {
+	background: var(--me-rust);
+	color: #ffffff !important;
+	text-decoration: none !important;
+}
+
+.single-experience .me-support-points-list {
+	width: 100%;
+	box-sizing: border-box;
+}
+
+.single-experience .me-support-point-card {
+	width: 100%;
+	box-sizing: border-box;
+}
