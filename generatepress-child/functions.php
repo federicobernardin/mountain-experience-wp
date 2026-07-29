@@ -417,6 +417,15 @@ function me_register_polylang_strings() {
 		'Difficoltà: T = Turistico, E = Escursionistico, EE = Escursionisti esperti, EEA = Escursionisti esperti con attrezzatura.',
 		'Esposizione: indica l’orientamento prevalente del percorso.',
 		'Materiale: indica l’attrezzatura consigliata o necessaria.',
+
+		// Support points.
+'Punti di appoggio',
+'Rifugio',
+'Bivacco',
+'Malga',
+'Punto di ristoro',
+'Altro',
+'Vai al sito',
 	);
 
 	foreach ( $strings as $string ) {
@@ -550,3 +559,67 @@ function me_localize_foogallery_image_viewer_buttons() {
 	<?php
 }
 add_action( 'wp_footer', 'me_localize_foogallery_image_viewer_buttons', 30 );
+
+/* =========================================================
+   Support Points CPT
+   ========================================================= */
+
+/**
+ * Register Support Points custom post type.
+ */
+function me_register_support_point_post_type() {
+	if ( post_type_exists( 'support_point' ) ) {
+		return;
+	}
+
+	$labels = array(
+		'name'               => __( 'Punti di appoggio', 'mountain-experience' ),
+		'singular_name'      => __( 'Punto di appoggio', 'mountain-experience' ),
+		'menu_name'          => __( 'Punti di appoggio', 'mountain-experience' ),
+		'add_new'            => __( 'Aggiungi nuovo', 'mountain-experience' ),
+		'add_new_item'       => __( 'Aggiungi punto di appoggio', 'mountain-experience' ),
+		'edit_item'          => __( 'Modifica punto di appoggio', 'mountain-experience' ),
+		'new_item'           => __( 'Nuovo punto di appoggio', 'mountain-experience' ),
+		'view_item'          => __( 'Vedi punto di appoggio', 'mountain-experience' ),
+		'search_items'       => __( 'Cerca punti di appoggio', 'mountain-experience' ),
+		'not_found'          => __( 'Nessun punto di appoggio trovato', 'mountain-experience' ),
+		'not_found_in_trash' => __( 'Nessun punto di appoggio nel cestino', 'mountain-experience' ),
+	);
+
+	$args = array(
+		'labels'              => $labels,
+		'public'              => false,
+		'publicly_queryable'  => false,
+		'show_ui'             => true,
+		'show_in_menu'        => true,
+		'show_in_rest'        => true,
+		'menu_icon'           => 'dashicons-location-alt',
+		'capability_type'     => 'post',
+		'hierarchical'        => false,
+		'supports'            => array( 'title' ),
+		'has_archive'         => false,
+		'exclude_from_search' => true,
+	);
+
+	register_post_type( 'support_point', $args );
+}
+add_action( 'init', 'me_register_support_point_post_type', 5 );
+
+
+/* =========================================================
+   Polylang - translatable support points
+   ========================================================= */
+
+/**
+ * Make Support Points translatable with Polylang.
+ *
+ * @param array $post_types Post types handled by Polylang.
+ * @param bool  $is_settings Whether the list is used in Polylang settings.
+ * @return array
+ */
+function me_polylang_translate_support_points( $post_types, $is_settings ) {
+	$post_types['support_point'] = 'support_point';
+
+	return $post_types;
+}
+add_filter( 'pll_get_post_types', 'me_polylang_translate_support_points', 20, 2 );
