@@ -231,16 +231,62 @@ if ( empty( $support_points ) || ! is_array( $support_points ) ) {
 					continue;
 				}
 
-				$support_point_title = get_the_title( $support_point_id );
+				$support_point_title    = get_the_title( $support_point_id );
+				$support_point_type     = function_exists( 'get_field' ) ? get_field( 'support_point_type', $support_point_id ) : '';
+				$support_point_altitude = function_exists( 'get_field' ) ? get_field( 'support_point_altitude', $support_point_id ) : '';
+				$support_point_location = function_exists( 'get_field' ) ? get_field( 'support_point_location', $support_point_id ) : '';
+				$support_point_url      = function_exists( 'get_field' ) ? get_field( 'support_point_external_url', $support_point_id ) : '';
 
 				if ( ! $support_point_title ) {
 					continue;
+				}
+
+				if ( is_array( $support_point_type ) && isset( $support_point_type['value'] ) ) {
+					$support_point_type = $support_point_type['value'];
+				}
+
+				$support_point_type_label = '';
+
+				if ( 'rifugio' === $support_point_type ) {
+					$support_point_type_label = me_translate( 'Rifugio' );
+				} elseif ( 'bivacco' === $support_point_type ) {
+					$support_point_type_label = me_translate( 'Bivacco' );
+				} elseif ( 'malga' === $support_point_type ) {
+					$support_point_type_label = me_translate( 'Malga' );
+				} elseif ( 'ristoro' === $support_point_type ) {
+					$support_point_type_label = me_translate( 'Punto di ristoro' );
+				} elseif ( 'altro' === $support_point_type ) {
+					$support_point_type_label = me_translate( 'Altro' );
 				}
 				?>
 
 				<span class="me-taxonomy-pill">
 					<?php echo esc_html( $support_point_title ); ?>
 				</span>
+
+				<?php if ( $support_point_type_label ) : ?>
+					<span class="me-taxonomy-pill">
+						<?php echo esc_html( $support_point_type_label ); ?>
+					</span>
+				<?php endif; ?>
+
+				<?php if ( $support_point_altitude ) : ?>
+					<span class="me-taxonomy-pill">
+						<?php echo esc_html( me_format_field_value( $support_point_altitude, 'm' ) ); ?>
+					</span>
+				<?php endif; ?>
+
+				<?php if ( $support_point_location ) : ?>
+					<span class="me-taxonomy-pill">
+						<?php echo esc_html( $support_point_location ); ?>
+					</span>
+				<?php endif; ?>
+
+				<?php if ( $support_point_url ) : ?>
+					<span class="me-taxonomy-pill">
+						<?php echo esc_html( me_translate( 'Sito esterno disponibile' ) ); ?>
+					</span>
+				<?php endif; ?>
 			<?php endforeach; ?>
 		</div>
 	</section>
